@@ -7,7 +7,7 @@ title: Kazan's Home
 subtitle: ''
 description: ''
 keywords: 'Kazan, 炎火山'
-author: Kazan
+author: Kazan @ Kazan Studio
 language: zh-tw
 timezone: 'UTC+8'
 
@@ -97,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme:  freemind.bithack
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
