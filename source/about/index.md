@@ -1,6 +1,6 @@
 ---
-title: about
-date: 2022-09-13 11:56:47
+latout: page
+title: 
 ---
 # About me
 
