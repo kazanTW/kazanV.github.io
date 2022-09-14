@@ -8,13 +8,13 @@ subtitle: ''
 description: ''
 keywords: 'Kazan, 炎火山'
 author: Kazan @ Kazan Studio
-language: zh
-timezone: 'UTC+8'
+language: zh-TW
+timezone: 'Asia/Taipei'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://kazan.tw
-permalink: :year/:month/:title/
+permalink: :title/
 permalink_defaults:
 pretty_urls:
   trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
@@ -31,7 +31,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year-:month-:day-:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link:
