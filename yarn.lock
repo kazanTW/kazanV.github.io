@@ -649,6 +649,13 @@
     "graceful-fs" "^4.1.11"
     "hexo-util" "^2.0.0"
 
+"hexo-generator-alias@^1.0.0":
+  "integrity" "sha512-DSq7gu6jeo4qiL68PKzfU4xDThxj6UiYDmdjuMOElEox9jFOhWoUNzi3l3cRUMzOQpUnOFYjSKzG6pmYMgcGig=="
+  "resolved" "https://registry.npmjs.org/hexo-generator-alias/-/hexo-generator-alias-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "hexo-util" "^2.4.0"
+
 "hexo-generator-archive@^1.0.0":
   "integrity" "sha512-24TeanDGpMBUIq37DHpSESQbeN6ssZ06edsGSI76tN4Yit50TgsgzP5g5DSu0yJk0jUtHJntysWE8NYAlFXibA=="
   "resolved" "https://registry.npmjs.org/hexo-generator-archive/-/hexo-generator-archive-1.0.0.tgz"
@@ -761,7 +768,7 @@
   "resolved" "https://registry.npmjs.org/hexo-theme-landscape/-/hexo-theme-landscape-0.0.3.tgz"
   "version" "0.0.3"
 
-"hexo-util@^2.0.0", "hexo-util@^2.1.0", "hexo-util@^2.5.0", "hexo-util@^2.7.0":
+"hexo-util@^2.0.0", "hexo-util@^2.1.0", "hexo-util@^2.4.0", "hexo-util@^2.5.0", "hexo-util@^2.7.0":
   "integrity" "sha512-hQM3h34nhDg0bSe/Tg1lnpODvNkz7h2u0+lZGzlKL0Oufp+5KCAEUX9wal7/xC7ax3/cwEn8IuoU75kNpZLpJQ=="
   "resolved" "https://registry.npmjs.org/hexo-util/-/hexo-util-2.7.0.tgz"
   "version" "2.7.0"
