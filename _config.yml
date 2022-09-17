@@ -6,7 +6,7 @@
 title: Kazan's Home
 subtitle: '敗北の少年、平凡を謳え'
 description: '歡迎光臨！'
-keywords: 'Kazan, 炎火山'
+keywords: '炎火山'
 author: Kazan @ Kazan Studio
 language: zh-TW
 timezone: 'Asia/Taipei'
@@ -19,8 +19,6 @@ permalink_defaults:
 pretty_urls:
   trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: false # Set to false to remove trailing '.html' from permalinks
-alias: 
-  cal/index.html: https://calendar.google.com/calendar/embed?src=andyswebking%40gmail.com&ctz=Asia%2FTaipei
 
 # Directory
 source_dir: source

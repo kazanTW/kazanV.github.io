@@ -1,7 +1,10 @@
 ---
 title: site-intro
 date: 2022-09-16 17:23:47
-tags: technical, infra
+categories: 
+- technical
+tags: 
+- infra
 ---
 # 網站基礎架構
 
