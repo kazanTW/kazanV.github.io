@@ -3,7 +3,6 @@ title: 資料結構 - 二元搜尋
 date: 2022-09-23 13:55:49
 categories:
 - Learning
-- Data science
 tags:
 - C
 - Data Structure

@@ -3,7 +3,6 @@ title: Java 實作 Stack - 使用陣列
 date: 2022-09-20 09:43:41
 categories:
 - Learning
-- Data science
 tags:
 - Java
 - Data Structure
