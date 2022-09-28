@@ -58,14 +58,14 @@ int main(void) {
 
 上面兩個程式碼拿給任一個人看，大多數都會說後者看起來比較舒服，
 也會比較有耐心（？）幫忙 debug，這說明**沒有適度的排版確實會影響閱讀體驗**；
-簡單說，你今天要拜託人看程式碼<，結果因為你寫得很醜反而讓對方很困擾，
+簡單說，你今天要拜託人看程式碼，結果因為你寫得很醜反而讓對方很困擾，
 這不是造成人家更麻煩、你自己也更麻煩嗎？
 如同寫字一樣，寫程式碼最基本的就是整齊易讀。
 
 最後給各位看個非常極端的案例：
 ```C
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 int binSearch(int arr[],int target,int left,int right);
 int compare(int x,int y);
 int main(void){
