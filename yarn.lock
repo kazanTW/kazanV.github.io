@@ -593,6 +593,11 @@
   dependencies:
     "function-bind" "^1.1.1"
 
+"hexo-asset-link@^2.2.1":
+  "integrity" "sha512-YQxqkX+fUmzAjgbiExr1paMtfBuWuMTzhUTma+eruIybdvi9mL90Hz0sYEI8dfTl1JoJbl9Jjp5hrC5/saZwUw=="
+  "resolved" "https://registry.npmjs.org/hexo-asset-link/-/hexo-asset-link-2.2.1.tgz"
+  "version" "2.2.1"
+
 "hexo-cli@^4.3.0":
   "integrity" "sha512-lr46h1tK1RNQJAQZbzKYAWGsmqF5DLrW6xKEakqv/o9JqgdeempBjIm7HqjcZEUBpWij4EO65X6YJiDmT9LR7g=="
   "resolved" "https://registry.npmjs.org/hexo-cli/-/hexo-cli-4.3.0.tgz"
@@ -782,7 +787,7 @@
     "prismjs" "^1.17.1"
     "strip-indent" "^3.0.0"
 
-"hexo@^6.3.0":
+"hexo@^4.0.0 || ^5.0.0 || ^6.0.0", "hexo@^6.3.0":
   "integrity" "sha512-4Jq+rWd8sYvR1YdIQyndN/9WboQ/Mqm6eax8CjrjO+ePFm2oMVafSOx9WEyJ42wcLOHjfyMfnlQhnUuNmJIpPg=="
   "resolved" "https://registry.npmjs.org/hexo/-/hexo-6.3.0.tgz"
   "version" "6.3.0"
