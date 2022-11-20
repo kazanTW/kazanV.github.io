@@ -61,7 +61,7 @@ Arch 採用漸進式升級（rolling upgrade），這會使得套件每天都是
             - Processor(s): 4 CPUs，建議至少 2 CPUs
     - Display
         - Screen
-            - Video Memory: 64 MB，不確定就用預設
+            - Video Memory: 使用預設即可。
     - Storage
         - Controller: IDE
             這裡是重點，預設會是 "Empty"，點選 "Empty"，並按下 "Optical Drive" 旁邊的小圖示，選擇事先準備好的 .iso 檔案，並勾選 "Live CD/DVD"。
@@ -140,7 +140,7 @@ swapon /dev/sda4
 
 這些都做完了，終於要正式進入系統安裝的部份了！
 
-### 設定套件來源鏡像
+### 設定套件來源
 什麼又是設定？
 沒事只差一步了不要緊張，這個沒有設定好就可能會看到美麗的 "request time out" 喔<3
 
@@ -150,7 +150,7 @@ swapon /dev/sda4
 這邊有兩種方式提供，這次選用是用第二種：
 
 #### 手動修改 mirrorlist
-用官方提供的鏡像站列表，把在台灣的鏡像寫入 `/etc/pacman.d/mirrorlist` 並給予優先序，就這樣（？
+用官方提供的[鏡像站列表](https://archlinux.org/mirrorlist/)，把在台灣的鏡像寫入 `/etc/pacman.d/mirrorlist` 並給予優先序，就這樣（？
 
 #### 利用套件自動生成
 可以利用 `reflector` 這個套件生成最佳排序：
