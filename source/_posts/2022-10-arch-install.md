@@ -158,7 +158,7 @@ swapon /dev/sda4
 # Install reflector
 pacman -Sy reflector
 # Generate mirrorlist
-reflector --verbose -l 5 --sort rate --conutry 'Taiwan' --save /etc/pacman.d/mirrorlist
+reflector --verbose -l 5 --sort rate --country 'Taiwan' --save /etc/pacman.d/mirrorlist
 ```
 
 完成這些設定後，我們真的要開始執行「安裝」了。
