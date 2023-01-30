@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>資料結構 - 二元搜尋 | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要這星期資結終於上機了，上週直接爽放一天假期ww不過這周一上課就是混沌地獄，一堆人直接忘記 C 怎麼寫……（助教：完蛋了之後更難我豈不是忙死）有人直接問怎麼輸入資料……連 scanf() 都忘記了嗎（尖叫至於 VLA（int array[n]）跟 code 不排版就算了吧（點菸 慣例的廢話就到這邊，接著來聊聊這周的題目——二元搜尋法吧。 基本知識一般我們在一串資料中要搜尋特定的一筆資料，直覺">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資料結構 - 二元搜尋">
+<meta property="og:url" content="http://kazan.tw/posts/binary-search/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要這星期資結終於上機了，上週直接爽放一天假期ww不過這周一上課就是混沌地獄，一堆人直接忘記 C 怎麼寫……（助教：完蛋了之後更難我豈不是忙死）有人直接問怎麼輸入資料……連 scanf() 都忘記了嗎（尖叫至於 VLA（int array[n]）跟 code 不排版就算了吧（點菸 慣例的廢話就到這邊，接著來聊聊這周的題目——二元搜尋法吧。 基本知識一般我們在一串資料中要搜尋特定的一筆資料，直覺">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-09-23T05:55:49.000Z">
+<meta property="article:modified_time" content="2023-01-29T05:21:36.996Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Data Structure">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-binary-search" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/binary-search/" class="article-date">
+  <time class="dt-published" datetime="2022-09-23T05:55:49.000Z" itemprop="datePublished">2022-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      資料結構 - 二元搜尋
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>這星期資結終於上機了，上週直接爽放一天假期ww<br>不過這周一上課就是混沌地獄，一堆人直接忘記 C 怎麼寫……（助教：完蛋了之後更難我豈不是忙死）<br>有人直接問怎麼輸入資料……連 <code>scanf()</code> 都忘記了嗎（尖叫<br><del>至於 VLA（<code>int array[n]</code>）跟 code 不排版就算了吧（點菸</del></p>
+<p>慣例的廢話就到這邊，接著來聊聊這周的題目——二元搜尋法吧。</p>
+<h2 id="基本知識"><a href="#基本知識" class="headerlink" title="基本知識"></a>基本知識</h2><p>一般我們在一串資料中要搜尋特定的一筆資料，直覺的方式就是從頭開始一筆筆比對，也就是所謂的線性搜尋，<br>但這樣需要花費的可能時間會非常的長，如果目標在最後一筆就會找非常久；<br>二元搜尋法則是利用「中間值」的概念，在一串已經<strong>排序過</strong>的資料中，每次都比對一定範圍的「中間」索引，<br>若不是目標資料的話則以中間值與其中一端為範圍，即縮小一半的搜尋區間，<br>然後不斷循環這樣的搜尋方式，直到找到目標。<br>這個方法相較於線性搜尋的好處是，搜尋的可能時間最壞會指數減少，<br>以演算法要求的時間複雜度而言，這是一個較好的解決方案。</p>
+<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><ul>
+<li><em>輸入：輸入一個陣列長度，並依序輸入整數陣列資料，最後輸入一個搜尋目標。</em></li>
+<li><em>輸出：每一輪搜尋都輸出兩行，第一行為左右邊界及中間值的索引值，第二行為對應的資料；若最後有找到目標資料，輸出其索引值。</em></li>
+<li><em><strong>注意：只能使用 C 或 C++，並請使用「遞迴」方式搜尋；另外本次的測資都是「可以找到目標」，不需要考慮找不到的情形。</strong></em></li>
+</ul>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>這邊就用我們的老朋友 C 來實作（C++？對不起我們不熟）。</p>
+<h3 id="注意-VLA"><a href="#注意-VLA" class="headerlink" title="注意 VLA"></a>注意 VLA</h3><p>首先建立一個陣列，這邊許多初學者會犯的錯誤是 VLA（Variable Length Array，可變長度陣列），其實以安全性來說是非常不安全的。<br>什麼是 VLA？顧名思義，就是陣列的長度是可以更改的，如下列程式碼：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;          <span class="comment">// 一堆人都用這個宣告大小我已經懶得吐嘈了</span></span><br><span class="line"><span class="type">int</span> <span class="built_in">array</span>[n];   <span class="comment">// 使用變數宣告陣列大小</span></span><br></pre></td></tr></table></figure>
+<p>你或許會問，長度可變不好嗎？陣列有彈性不是好事嗎？<br>但這樣宣告的問題在於，記憶體容易發生 stack overflow（<del>不是我們常常抄 code 那個</del>），<br>因為記憶體就是配置在一個固定大小的 stack，所以若是 <code>n</code> 太大就會爆掉。</p>
+<p>如果真的需要陣列長度保持彈性，或者陣列大小依賴輸入值，<br>請務必使用<strong>動態記憶體</strong>分配的方式，如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span>     <span class="comment">// 務必要寫這行，因為 malloc() 是定義在這個標頭檔裡面的</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line"><span class="type">int</span> *<span class="built_in">array</span> = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * size);   <span class="comment">// 動態宣告記憶體配置</span></span><br></pre></td></tr></table></figure>
+<p>上述宣告是基本使用 <code>malloc()</code> 的方式，但其實還可以修改成 <code>int* array = malloc(sizeof *array * size)</code>，<br>這樣若是陣列型態有變化，比較不會發生左邊改了但右邊忘記改的囧況。</p>
+<h3 id="二元搜尋算法"><a href="#二元搜尋算法" class="headerlink" title="二元搜尋算法"></a>二元搜尋算法</h3><p>建立好陣列跟輸入資料，並且取得目標資料後，就是要考慮算法。</p>
+<p>前面提到二元搜尋的方式是利用「區間中間值」，所以我們首先要考慮中間值的位置，<br>若陣列長度是奇數那就很簡單，但若是偶數，就需要定義中間值是哪一個，<br>一般我們會定義中間兩數取較小的為中間值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> middle = (left + right) / <span class="number">2</span>;     <span class="comment">// left 是左區間，right 是右區間</span></span><br></pre></td></tr></table></figure>
+<p>這邊不 - 1 是因為 C 的 <code>/</code> 運算在兩數皆為整數時只會取整數的商值，例如 <code>9 / 2</code> 得到的會是 <code>4</code> 而不是 <code>4.5</code>，<br>正好會符合前面所述取中間兩數較小者。</p>
+<p>接著就是進行比對，如果一次就中當然幸運，直接回傳索引值；<br>但不是的時候肯定要進行下一輪比對，直到找到為止。<br>一般想法就是用迴圈跑，但這次題目要求用遞迴，那該怎麼寫？</p>
+<h3 id="使用遞迴"><a href="#使用遞迴" class="headerlink" title="使用遞迴"></a>使用遞迴</h3><p>遞迴的寫法其實並沒有很複雜，比對過大小後，若不是目標就再次呼叫搜尋函式，不過會有兩種情形：</p>
+<ol>
+<li>目標資料比中間資料大</li>
+<li>目標資料比中間資料小</li>
+</ol>
+<p>這兩種情形傳入函式的引數會不太一樣。</p>
+<h4 id="目標資料比中間資料大"><a href="#目標資料比中間資料大" class="headerlink" title="目標資料比中間資料大"></a>目標資料比中間資料大</h4><p>代表目標資料索引在目前中間值的<strong>右邊</strong>，所以將<strong>中間值 + 1</strong> 作為新的<strong>左</strong>區間。</p>
+<h4 id="目標資料比中間資料小"><a href="#目標資料比中間資料小" class="headerlink" title="目標資料比中間資料小"></a>目標資料比中間資料小</h4><p>代表目標資料索引在目前中間值的<strong>左邊</strong>，所以將<strong>中間值 - 1</strong> 作為新的<strong>右</strong>區間。</p>
+<p>這邊用 switch-case 的方式判斷：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (left &lt;= right) &#123;     <span class="comment">// 因為資料排序過，應該是左區間小於右區間，若不是則整個函式回傳 -1</span></span><br><span class="line">    <span class="keyword">switch</span> (compare(<span class="built_in">array</span>[middle], target)) &#123;   <span class="comment">// 比對目標與中間值，compare() 是另外宣告的比大小函式</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">-1</span>:    <span class="comment">// 目標比中間值大</span></span><br><span class="line">            <span class="keyword">return</span> search(<span class="built_in">array</span>, target, middle + <span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:     <span class="comment">// 中間值即是目標</span></span><br><span class="line">            <span class="keyword">return</span> middle;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:     <span class="comment">// 目標比中間值小</span></span><br><span class="line">            <span class="keyword">return</span> search(<span class="built_in">array</span>, target, left, middle <span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最終結果"><a href="#最終結果" class="headerlink" title="最終結果"></a>最終結果</h3><p>執行結果需要輸出每一次搜尋的左右區間跟中間值的「索引值」與「資料內容（數字）」，<br>因為每搜尋一次就要印一次，所以這個程序在每次呼叫搜尋函式就應該要被執行，故千萬不要寫在判斷式內，<br>而是輸出後再執行比對的判斷式；<br>最後找到目標資料後要將索引值單獨輸出一行，我自己的作法是將輸出的程序寫在主函式（<code>int main()</code>）裡面，<br>理由是我認為這個程序是在上述「搜尋」的函式以外的動作，所以我只讓搜尋函式在找到目標後回傳其索引給主函式，<br>而在主函式則設定一個變數接收最後回傳的索引值，並接著輸出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> targetIndex = search(<span class="built_in">array</span>, targer, <span class="number">0</span>, arraySize - <span class="number">1</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, targetIndex);</span><br></pre></td></tr></table></figure>
+<p>將以上組合就是這次的結果了。</p>
+<h2 id="結論與討論"><a href="#結論與討論" class="headerlink" title="結論與討論"></a>結論與討論</h2><p>這次終於不是我翻車了，但換來的是看到一堆令人吐血的慘烈 code（幹</p>
+<p>其實二元搜尋真的沒有很難，這次我大約花半小時就完成，當然以高手的角度還是很慢了；<br>不過我主要是想檢討幾個能更好的地方：</p>
+<h3 id="1-沒用指標"><a href="#1-沒用指標" class="headerlink" title="1. 沒用指標"></a>1. 沒用指標</h3><p>其實在 C 裡面善用指標能使執行效率有效提昇，因為電腦其實更認得記憶體位址而不是單純索引或是變數，<br>但我指標其實還需要補強（我因為指標被當過……），希望在學期結束前能更為熟練。</p>
+<h3 id="2-沒有處理例外情況"><a href="#2-沒有處理例外情況" class="headerlink" title="2. 沒有處理例外情況"></a>2. 沒有處理例外情況</h3><p>雖然題目是說不會有找不到的情況，<br>但一個好的程式設計應該要設想到大部分的例外情況並處理，而不是放著讓程式噴 error；<br>搜尋函式其實在找不到的情況應該會回傳一個 <code>-1</code>，可以從這個地方切入去想想怎麼處理，<br>在看了許多高手的文章後，大部分會尋找一個近似值，之後我應該會找時間實作一下。</p>
+<blockquote>
+<p>在每次的實作與錯誤（<del>ㄈㄢ ㄔㄜ</del>）中都能發現自己的不足並且檢討，<br>才能不斷進步，否則以後會繼續在同樣的地方跌倒。</p>
+</blockquote>
+<p>最後預告一下，下一篇我可能不會寫技術實作，而是來聊聊所謂 coding style，<br>這次真的被某些同學嚇到了……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/binary-search/" data-id="cldird5ed00076zr24ql8fmxl" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/coding-style/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          良好的 Coding style
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/nvim-setting/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Neovim 設定</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

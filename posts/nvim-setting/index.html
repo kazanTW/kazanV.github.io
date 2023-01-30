@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Neovim 設定 | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要上一篇文章的最後我提到學任何語言首先要先調教好編輯器，這是源自於我那天還沒開始寫任何 code，就先花了半天的時間在處理 Neovim 的設定，特別是 LSP 的設定真的差點搞死我……乾脆寫一篇來紀錄跟分享這個過程。我是不是要感謝我的笨拙跟容易翻車讓我常常有題材可以寫文章 為什麼是純文字編輯器或許有人會問：「現在新式的 IDE 像是 VS Code 界面漂亮而且使用方便，為什麼還要用純文字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neovim 設定">
+<meta property="og:url" content="http://kazan.tw/posts/nvim-setting/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要上一篇文章的最後我提到學任何語言首先要先調教好編輯器，這是源自於我那天還沒開始寫任何 code，就先花了半天的時間在處理 Neovim 的設定，特別是 LSP 的設定真的差點搞死我……乾脆寫一篇來紀錄跟分享這個過程。我是不是要感謝我的笨拙跟容易翻車讓我常常有題材可以寫文章 為什麼是純文字編輯器或許有人會問：「現在新式的 IDE 像是 VS Code 界面漂亮而且使用方便，為什麼還要用純文字">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-09-20T23:51:09.000Z">
+<meta property="article:modified_time" content="2023-01-29T05:21:36.996Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Neovim">
+<meta property="article:tag" content="Editors">
+<meta property="article:tag" content="LSP">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-nvim-setting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/nvim-setting/" class="article-date">
+  <time class="dt-published" datetime="2022-09-20T23:51:09.000Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Technical/">Technical</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Neovim 設定
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上一篇文章的最後我提到學任何語言首先要先調教好編輯器，<br>這是源自於我那天還沒開始寫任何 code，就先花了半天的時間在處理 Neovim 的設定，特別是 LSP 的設定真的差點搞死我……<br>乾脆寫一篇來紀錄跟分享這個過程。<br><del>我是不是要感謝我的笨拙跟容易翻車讓我常常有題材可以寫文章</del></p>
+<h2 id="為什麼是純文字編輯器"><a href="#為什麼是純文字編輯器" class="headerlink" title="為什麼是純文字編輯器"></a>為什麼是純文字編輯器</h2><p>或許有人會問：「現在新式的 IDE 像是 VS Code 界面漂亮而且使用方便，為什麼還要用純文字編輯器？」<br>這有很多可以說的面向，而且每個人的理由也不盡相同，<br>我自己的話是想要挑戰看看純文字編輯器的功能是不是真的不如 IDE、以及單純覺得好玩（o<br>當然專案開發我自己還是以 IDE 為主，因為視覺化的看專案檔真的比較輕鬆一點。<br>（BTW，雖然我前天 Java 是用 Neovim 寫的，<br>但強者我朋友 a.k.a. 清大怪物高秋表示「Java『專案』」是他數一數二推薦用 IDE 進行開發的語言，<br>因為純用 command line 會很煩躁）</p>
+<h2 id="為什麼是-Neovim"><a href="#為什麼是-Neovim" class="headerlink" title="為什麼是 Neovim"></a>為什麼是 Neovim</h2><p>純文字編輯器主流分成兩大系譜：emacs 跟 vi，那為什麼我選擇了 vi 這支而不是 emacs 系？<br><del>因為 emacs 東西太多了，多到我會尖叫 too much 那種多（關於這個我不打算寫，我會逼高秋寫），</del><br>vi 系的好處，或者說優勢是在 terminal 上比較便利，emacs 只有 GUI 版比較好用，<br>如果想嘗試終端機界面 coding，用 vi 系的體驗會比較好；<br>至於選擇 Neovim 是因為 plug-in 的生態比較活躍，<br>並且自行撰寫 plug-in 也比較容易<del>，這是個 plug-in 的<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1FliVTcX8bQ">新時代</a></del>。</p>
+<h2 id="Neovim-設定調教"><a href="#Neovim-設定調教" class="headerlink" title="Neovim 設定調教"></a>Neovim 設定<del>調教</del></h2><p>好我花太多篇幅寫為什麼了，趕快進入正題（（（</p>
+<p>先把 Neovim 安裝好（怎麼安裝？去搜尋！），接著要來改一下設定檔囉～</p>
+<h3 id="init-vim"><a href="#init-vim" class="headerlink" title="init.vim"></a>init.vim</h3><p>這是 Neovim 的全域設定檔，通常應該在 <code>~/.config/nvim/</code> 之下，<br>然後隨便開個編輯器來改設定就好了w</p>
+<p>一開始的 <code>init.vim</code> 應該會看到幾乎每一行開頭都是雙引號 <code>&quot;</code>，<br>這是由於 Neovim 本身預設是用 vimscript 來寫相關設定，在這個語言中 <code>&quot;</code> 是註解（就像 C 裡面的 <code>//</code> 一樣）；<br>不過現在主流是使用 Lua 語言來寫設定跟 plug-in ，所以該怎麼辦呢？</p>
+<p><strong>那就自己寫一個 Lua 設定就好啦！</strong></p>
+<h3 id="Lua-設定檔"><a href="#Lua-設定檔" class="headerlink" title="Lua 設定檔"></a>Lua 設定檔</h3><p>首先在剛剛的 <code>~/.config/nvim/</code> 下新增一個 <code>lua</code> 目錄，<br>在 <code>lua</code> 裡面建立一個設定的 <code>.lua</code> 檔案（這邊取名 <code>setups.lua</code>），<br>然後以下是範例檔案（至於需要加上什麼請參考各 plug-in 說明文件）：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---nvim-lsp-installer</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;nvim-lsp-installer&quot;</span>).setup &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">---nvim-cmp</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> cmp = <span class="built_in">require</span><span class="string">&#x27;cmp&#x27;</span></span><br><span class="line"></span><br><span class="line">cmp.setup(&#123;</span><br><span class="line">  snippet = &#123;</span><br><span class="line">    <span class="comment">-- REQUIRED - you must specify a snippet engine</span></span><br><span class="line">    expand = <span class="function"><span class="keyword">function</span><span class="params">(args)</span></span></span><br><span class="line">      <span class="comment">-- vim.fn[&quot;vsnip#anonymous&quot;](args.body) -- For `vsnip` users.</span></span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;luasnip&#x27;</span>).lsp_expand(args.body) <span class="comment">-- For `luasnip` users.</span></span><br><span class="line">      <span class="comment">-- require(&#x27;snippy&#x27;).expand_snippet(args.body) -- For `snippy` users.</span></span><br><span class="line">      <span class="comment">-- vim.fn[&quot;UltiSnips#Anon&quot;](args.body) -- For `ultisnips` users.</span></span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  window = &#123;</span><br><span class="line">    <span class="comment">-- completion = cmp.config.window.bordered(),</span></span><br><span class="line">    <span class="comment">-- documentation = cmp.config.window.bordered(),</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mapping = cmp.mapping.preset.<span class="built_in">insert</span>(&#123;</span><br><span class="line">    [<span class="string">&#x27;&lt;C-b&gt;&#x27;</span>] = cmp.mapping.scroll_docs(<span class="number">-4</span>),</span><br><span class="line">    [<span class="string">&#x27;&lt;C-f&gt;&#x27;</span>] = cmp.mapping.scroll_docs(<span class="number">4</span>),</span><br><span class="line">    [<span class="string">&#x27;&lt;C-Space&gt;&#x27;</span>] = cmp.mapping.complete(),</span><br><span class="line">    [<span class="string">&#x27;&lt;C-e&gt;&#x27;</span>] = cmp.mapping.abort(),</span><br><span class="line">    [<span class="string">&#x27;&lt;CR&gt;&#x27;</span>] = cmp.mapping.confirm(&#123; <span class="built_in">select</span> = <span class="literal">true</span> &#125;), <span class="comment">-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.</span></span><br><span class="line">  &#125;),</span><br><span class="line">  sources = cmp.<span class="built_in">config</span>.sources(&#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;nvim_lsp&#x27;</span> &#125;,</span><br><span class="line">    &#123; name = <span class="string">&#x27;vsnip&#x27;</span> &#125;, <span class="comment">-- For vsnip users.</span></span><br><span class="line">    <span class="comment">-- &#123; name = &#x27;luasnip&#x27; &#125;, -- For luasnip users.</span></span><br><span class="line">    <span class="comment">-- &#123; name = &#x27;ultisnips&#x27; &#125;, -- For ultisnips users.</span></span><br><span class="line">    <span class="comment">-- &#123; name = &#x27;snippy&#x27; &#125;, -- For snippy users.</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;buffer&#x27;</span> &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Set configuration for specific filetype.</span></span><br><span class="line">cmp.setup.filetype(<span class="string">&#x27;gitcommit&#x27;</span>, &#123;</span><br><span class="line">  sources = cmp.<span class="built_in">config</span>.sources(&#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;cmp_git&#x27;</span> &#125;, <span class="comment">-- You can specify the `cmp_git` source if you were installed it.</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;buffer&#x27;</span> &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Use buffer source for `/` (if you enabled `native_menu`, this won&#x27;t work anymore).</span></span><br><span class="line">cmp.setup.cmdline(<span class="string">&#x27;/&#x27;</span>, &#123;</span><br><span class="line">  mapping = cmp.mapping.preset.cmdline(),</span><br><span class="line">  sources = &#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;buffer&#x27;</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Use cmdline &amp; path source for &#x27;:&#x27; (if you enabled `native_menu`, this won&#x27;t work anymore).</span></span><br><span class="line">cmp.setup.cmdline(<span class="string">&#x27;:&#x27;</span>, &#123;</span><br><span class="line">  mapping = cmp.mapping.preset.cmdline(),</span><br><span class="line">  sources = cmp.<span class="built_in">config</span>.sources(&#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;path&#x27;</span> &#125;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    &#123; name = <span class="string">&#x27;cmdline&#x27;</span> &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Set up lspconfig.</span></span><br><span class="line"><span class="keyword">local</span> capabilities = <span class="built_in">require</span>(<span class="string">&#x27;cmp_nvim_lsp&#x27;</span>).update_capabilities(vim.lsp.protocol.make_client_capabilities())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--- nvim-lspconfig</span></span><br><span class="line"><span class="comment">-- Mappings.</span></span><br><span class="line"><span class="comment">-- See `:help vim.diagnostic.*` for documentation on any of the below functions</span></span><br><span class="line"><span class="keyword">local</span> opts = &#123; noremap=<span class="literal">true</span>, silent=<span class="literal">true</span> &#125;</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;space&gt;e&#x27;</span>, vim.diagnostic.open_float, opts)</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;[d&#x27;</span>, vim.diagnostic.goto_prev, opts)</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;]d&#x27;</span>, vim.diagnostic.goto_next, opts)</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;space&gt;q&#x27;</span>, vim.diagnostic.setloclist, opts)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Use an on_attach function to only map the following keys</span></span><br><span class="line"><span class="comment">-- after the language server attaches to the current buffer</span></span><br><span class="line"><span class="keyword">local</span> on_attach = <span class="function"><span class="keyword">function</span><span class="params">(client, bufnr)</span></span></span><br><span class="line"><span class="comment">---- Enable completion triggered by &lt;c-x&gt;&lt;c-o&gt;</span></span><br><span class="line"><span class="comment">--vim.api.nvim_buf_set_option(bufnr, &#x27;omnifunc&#x27;, &#x27;v:lua.vim.lsp.omnifunc&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">---- Mappings.</span></span><br><span class="line"><span class="comment">---- See `:help vim.lsp.*` for documentation on any of the below functions</span></span><br><span class="line"><span class="comment">--local bufopts = &#123; noremap=true, silent=true, buffer=bufnr &#125;</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;gD&#x27;, vim.lsp.buf.declaration, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;gd&#x27;, vim.lsp.buf.definition, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;K&#x27;, vim.lsp.buf.hover, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;gi&#x27;, vim.lsp.buf.implementation, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;C-k&gt;&#x27;, vim.lsp.buf.signature_help, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;wa&#x27;, vim.lsp.buf.add_workspace_folder, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;wr&#x27;, vim.lsp.buf.remove_workspace_folder, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;wl&#x27;, function()</span></span><br><span class="line">  <span class="comment">--print(vim.inspect(vim.lsp.buf.list_workspace_folders()))</span></span><br><span class="line"><span class="comment">--end, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;D&#x27;, vim.lsp.buf.type_definition, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;rn&#x27;, vim.lsp.buf.rename, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;ca&#x27;, vim.lsp.buf.code_action, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;gr&#x27;, vim.lsp.buf.references, bufopts)</span></span><br><span class="line"><span class="comment">--vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;space&gt;f&#x27;, vim.lsp.buf.formatting, bufopts)</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> lsp_flags = &#123;</span><br><span class="line"><span class="comment">---- This is the default in Nvim 0.7+</span></span><br><span class="line"><span class="comment">--debounce_text_changes = 150,</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;lspconfig&#x27;</span>).jdtls.setup&#123;</span><br><span class="line"><span class="comment">--on_attach = on_attach,</span></span><br><span class="line"><span class="comment">--flags = lsp_flags,</span></span><br><span class="line">capabilities = capabilities,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至於這些是什麼東西？<br>稍後會挑重點講解。</p>
+<h3 id="vim-plug-設定"><a href="#vim-plug-設定" class="headerlink" title="vim-plug 設定"></a>vim-plug 設定</h3><p>接著回到 <code>init.vim</code>，我們要先安裝 plug-in 管理，<br>目前主流有兩種使用 plug-in 的方式：</p>
+<ol>
+<li>packer.vim</li>
+<li>vim-plug</li>
+</ol>
+<p>這次我使用了 vim-plug，至於怎麼安裝 vim-plug 並且加入 plug-in ，<br>可以參考另一個強者我朋友 SimbaFs 寫的<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10273424">這篇文章</a>，這邊不多加贅述。</p>
+<p>確定 vim-plug 安裝成功後，<br>就可以在兩個 <code>call plug</code> 中間的區塊（見前述文章）加入你要的 plug-in 了。</p>
+<h3 id="LSP-plug-ins"><a href="#LSP-plug-ins" class="headerlink" title="LSP plug-ins"></a>LSP plug-ins</h3><p>終於要來設定重點的 LSP 了，沒有 LSP 你用 Neovim 就等於用記事本而已（o）<br>首先在上述區塊中加入這行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug &#x27;neovim/nvim-lspconfig&#x27;</span><br></pre></td></tr></table></figure>
+<p>這個負責執行 LSP server，<br>接著如果你的 Neovim 是 0.7.0 以後的版本（現在大部份發行板的 <code>latest</code> 都過了吧），<br>就可以安裝 <code>williamboman/nvim-lsp-installer</code> 這個 plug-in，可以直接在指令列下 <code>:LspInstall</code> 安裝 LSP server：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug &#x27;williamboman/nvim-lsp-installer&#x27;</span><br></pre></td></tr></table></figure>
+<p>接下來是與自動完成相關的 plug-in，前兩者建議一定要安裝，<br>第三個端看你 <code>setups.lua</code> 中 expand 選擇什麼，因為我選擇了 <code>luasnip</code>，所以就是安裝這個：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Plug &#x27;hrsh7th/nvim-cmp&#x27;</span><br><span class="line">Plug &#x27;hrsh7th/cmp-nvim-lsp&#x27;</span><br><span class="line">Plug &#x27;L3MON4D3/LuaSnip&#x27;</span><br></pre></td></tr></table></figure>
+<p>儲存修改後，開啟 Neovim，直接下 <code>:PlugInstall</code> 指令，會根據 <code>init.vim</code> 的內容安裝，<br>安裝成功就可以先下 <code>:q</code> 關閉。</p>
+<h3 id="使用-setups-lua"><a href="#使用-setups-lua" class="headerlink" title="使用 setups.lua"></a>使用 setups.lua</h3><p>在稍早我們新增了一個名為 <code>.config/nvim/lua/setups.lua</code> 的檔案，<br>接下來就是要讓 <code>init.vim</code> 使用這個檔案進行設定。</p>
+<p>在 <code>call plug#end()</code> 下面新增一行 <code>lua require(&#39;setups&#39;)</code>，<br><strong>注意引號內要寫的是 lua 設定檔的檔名（不要照抄！）</strong>，<br>儲存後可以開啟 Neovim，沒有噴 Error 就是成功了。<br><del>然後就不需要再碰 vimscript 了。</del></p>
+<p>所以這個檔案到底是什麼東西？<br>簡單來說是把 plug-in 的設定都寫進來，讓 Neovim 自己去讀取，<br>大部分設定都不用改（有興趣可以去研究看看XD），這邊要特別提及的是兩個區塊：</p>
+<ol>
+<li><code>cmp.setup()</code> 裡面的 <code>expand</code> 部份</li>
+<li>最下面 <code>require</code> 的部份</li>
+</ol>
+<h4 id="expand"><a href="#expand" class="headerlink" title="expand"></a>expand</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">expand = <span class="function"><span class="keyword">function</span><span class="params">(args)</span></span></span><br><span class="line">  <span class="comment">-- vim.fn[&quot;vsnip#anonymous&quot;](args.body) -- For `vsnip` users.</span></span><br><span class="line">  <span class="built_in">require</span>(<span class="string">&#x27;luasnip&#x27;</span>).lsp_expand(args.body) <span class="comment">-- For `luasnip` users.</span></span><br><span class="line">  <span class="comment">-- require(&#x27;snippy&#x27;).expand_snippet(args.body) -- For `snippy` users.</span></span><br><span class="line">  <span class="comment">-- vim.fn[&quot;UltiSnips#Anon&quot;](args.body) -- For `ultisnips` users.</span></span><br><span class="line"><span class="keyword">end</span>,</span><br></pre></td></tr></table></figure>
+<p>這邊是放自動完成格式的 plug-in，平行的四行是讓你選擇其一（<del>記得要安裝不然會像我一樣翻車</del>），<br>至於安裝方式就是找到 GitHub repo，以 <code>Plug &#39;author/repo_name&#39;</code> 的方式寫入 <code>init.vim</code> 並安裝，<br>其他不需要的就是註解掉（在 Lua 裡面是使用 <code>--</code>）。</p>
+<h4 id="require"><a href="#require" class="headerlink" title="require"></a>require</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;lspconfig&#x27;</span>).jdtls.setup&#123;</span><br><span class="line"><span class="comment">--on_attach = on_attach,</span></span><br><span class="line"><span class="comment">--flags = lsp_flags,</span></span><br><span class="line">capabilities = capabilities,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這邊是設定 LSP server 的自動完成，跟上面 <code>expand</code> 都有設定才是完整的自動完成。<br>把 <code>jdtls</code> 的部份代換成你要的 LSP server 就可以了（至於有哪些可以用請參考官方文件）；<br>有複數個 server 就如法炮製複製同樣的段落。</p>
+<p>好啦，現在應該是可以開心的當 IDE 來寫程式囉（？），<br>如果要檢查有沒有正常運作可以開啟原始碼檔案，指令輸入 <code>:LspInfo</code> 檢查，<br>沒有問題就可以舒舒服服的 coding 啦！</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>如果真的很懶還是請用 IDE，第一次操作你一定會想放棄（ｏ<br>不過花半天設定完看到可以正常運作的時候還是會很感動的。</p>
+<p>另外提醒如果是用 Java 的 <code>jdtls</code>，請務必注意 OpenJDK 版本要是最新的（目前是 <code>openjdk-17-jre</code>），<br>不然 LSP 還是不會動的喔&lt;3（受害者辛酸發言）</p>
+<p>如果想挑戰自我的真的可以玩看看純文字編輯器，<br>你會發現新大陸www</p>
+<p>火山 &#x2F; Kazan<br>2022.09.21</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="cldird5ef00096zr2fb604nmq" data-title="Neovim 設定" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/binary-search/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          資料結構 - 二元搜尋
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/20-java-stack/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 實作 Stack - 使用陣列</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

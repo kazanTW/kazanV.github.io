@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 實作 Stack - 使用陣列 | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要先吐嘈老師根本喪心病狂w 昨天物件導向正式上課跟上機（雖然我都上自己的機），一開始老師簡單介紹了 Java 基本操作，畢竟這年頭 Java 不是必修課（？）；然後就出了三個作業：（萬年不變的）Hello world、運算子運用，最後一個就是今天的主角：實作 Stack。 如果說有學過 Java 可能會知道，java.util 有個 package 叫 Stack 就是用來實作 stack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 實作 Stack - 使用陣列">
+<meta property="og:url" content="http://kazan.tw/posts/20-java-stack/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要先吐嘈老師根本喪心病狂w 昨天物件導向正式上課跟上機（雖然我都上自己的機），一開始老師簡單介紹了 Java 基本操作，畢竟這年頭 Java 不是必修課（？）；然後就出了三個作業：（萬年不變的）Hello world、運算子運用，最後一個就是今天的主角：實作 Stack。 如果說有學過 Java 可能會知道，java.util 有個 package 叫 Stack 就是用來實作 stack">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-09-20T01:43:41.000Z">
+<meta property="article:modified_time" content="2023-01-29T05:21:36.996Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Data Structure">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20-java-stack" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/20-java-stack/" class="article-date">
+  <time class="dt-published" datetime="2022-09-20T01:43:41.000Z" itemprop="datePublished">2022-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 實作 Stack - 使用陣列
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p><del>先吐嘈老師根本喪心病狂w</del></p>
+<p>昨天物件導向正式上課跟上機（雖然我都上自己的機），<br>一開始老師簡單介紹了 Java 基本操作，畢竟這年頭 Java 不是必修課（？）；<br>然後就出了三個作業：（萬年不變的）Hello world、運算子運用，<br>最後一個就是今天的主角：<strong>實作 Stack</strong>。</p>
+<p>如果說有學過 Java 可能會知道，<code>java.util</code> 有個 package 叫 <code>Stack</code> 就是用來實作 stack 的，<br>但老師笑容可掬的說：「<strong>請用 array 實作喔。</strong>」<br>差點在教室尖叫。</p>
+<h2 id="基本知識"><a href="#基本知識" class="headerlink" title="基本知識"></a>基本知識</h2><p>Stack &#x2F; 堆疊，顧名思義就是把資料「堆」上去的結構，所以有以下特性：</p>
+<ol>
+<li>先進後出 &#x2F; 後進先出（<strong>LIFO, Last In First Out</strong>）</li>
+<li>除了頭尾外的每個節點都有「前綴」與「後繼」</li>
+</ol>
+<p>對於 stack 的操作通常有以下兩種方法：</p>
+<ul>
+<li>push：將資料存入 stack 頂端</li>
+<li>pop：將 stack 頂端資料移除，頂端移到下一筆資料</li>
+</ul>
+<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><em>請以一維陣列實作 stack，其中元素（elements）儲存於 <code>stack[0]</code> 到 <code>stack[top]</code> 之間。</em></p>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>這次除了實作 stack 的操作，<br>還要實作顯示頂端資料（<code>top()</code>）、判斷 stack 是否為滿（<code>isFull()</code>）或空（<code>isEmpty()</code>）、pop 全部資料（<code>popall()</code>），<br>一開始想說把資料頂端定義為 stack[0]，但發現用以前學 C 的概念會讓自己寫出一堆無用跟充滿 bug 的程式碼，<br>後來發現自己題目沒看清楚（見「題目」），才發現頂端是 <code>stack[top]</code>，<br>所以可以設定一個頂端索引值（<code>top</code>），並初始為 <code>-1</code> 讓操作較為輕鬆。<br><del><strong>這告訴我們題目一定要看清楚。</strong></del></p>
+<h3 id="判斷是否為滿或空"><a href="#判斷是否為滿或空" class="headerlink" title="判斷是否為滿或空"></a>判斷是否為滿或空</h3><ul>
+<li><code>isFull()</code>：stack 如果滿的時候，<code>top</code> 值會等於 4（因為大小設為 5，故堆滿時頂端索引為 5 - 1 &#x3D; 4），故判斷 <code>top</code> 是否等於 <code>MAX_STACK_SIZE - 1</code> 即可。</li>
+<li><code>isEmpty()</code>：stack 裡面沒有資料時，<code>top</code> 會小於 0（詳見 <code>pop()</code> 實作），故僅需要判斷 <code>top</code> 是否小於 0 即可判斷。</li>
+</ul>
+<h3 id="Stack-push"><a href="#Stack-push" class="headerlink" title="Stack push"></a>Stack push</h3><p>先判斷 stack 是不是已經堆滿，若是則警告；否則就將元素放入頂端。<br>放入的方式必須遵循 LIFO 的原則（不然就不是 stack 了），<br>故 push 進去的資料在陣列中索引值一定是 <code>top</code>，<br>而初始 stack 為空時 <code>top</code> 是 -1，所以一開始要先讓它成為 0（<code>++top</code>），<br>後續 push 進去的索引則依序增加。</p>
+<h3 id="Stack-pop"><a href="#Stack-pop" class="headerlink" title="Stack pop"></a>Stack pop</h3><p><code>pop()</code> 方法是要「取出」頂端的資料，<br>所以先判斷 stack 是否為空（不然沒資料怎麼 pop？），接著將頂端索引值 -1 即可（<code>top--</code>），<br>這是因為沒有索引就等於存取不到資料，「形同」刪除資料。（這樣比較容易理解啦w）</p>
+<h3 id="顯示頂端資料"><a href="#顯示頂端資料" class="headerlink" title="顯示頂端資料"></a>顯示頂端資料</h3><p>同 <code>pop()</code>，需要先判斷 stack 是否為空（沒資料顯示個鬼），接著存取頂端的資料並印出。</p>
+<h3 id="pop-全部資料"><a href="#pop-全部資料" class="headerlink" title="pop 全部資料"></a>pop 全部資料</h3><p>這部份要求連續顯示頂端資料並且 pop 該筆資料，直到 stack 為空；<br>既然已經有 <code>pop()</code> 方法就不需要另外刻一個 pop 資料的 feature，<br>直接利用迴圈跑 <code>pop()</code> 就可以了www，迴圈判斷就是檢查 stack 是否為空，若空（isEmpty() &#x3D;&#x3D; true）則停止迴圈。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p><del>首先你得先調教好你的編輯器</del>（應該下一篇文章會來聊這件事）</p>
+<p>用 Java 實作資料結構的體驗還蠻新鮮的，雖然其實我資料結構還沒開始上課（o）；</p>
+<p>然後學習資料結構的過程其實蠻有趣的，會讓以前寫 procedure function 的壞習慣減少很多，<br>能夠用更簡潔與快速的方式對資料進行操作，不只 code 會乾淨漂亮，維護也比較容易。</p>
+<p>老師預告下週會用物件的概念實作 stack，屆時再來看看有什麼不同之處吧！</p>
+<p>火山 &#x2F; Kazan<br>2022.09.20</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/20-java-stack/" data-id="cldird5e900036zr2d8n6ei66" data-title="Java 實作 Stack - 使用陣列" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/nvim-setting/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Neovim 設定
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/16-site-intro/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">網站基礎架構</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

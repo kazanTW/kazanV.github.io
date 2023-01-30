@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>良好的 Coding style | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要上一篇聊到同學們 code 的排版造成我很嚴重的視力及心理傷害（無誤），這篇正好來聊聊一個好的 coding style 是什麼吧！ 注意：本篇所有論點皆屬個人見解，若不認同請保持理性討論。 什麼是 coding style？Coding style 指的是「程式碼的『寫作』風格」，如同一般的文章風格一樣，程式碼的寫作風格也會因人而異，小至空格的使用、大括號 &amp;#123;&amp;#125; 的位">
+<meta property="og:type" content="article">
+<meta property="og:title" content="良好的 Coding style">
+<meta property="og:url" content="http://kazan.tw/posts/coding-style/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要上一篇聊到同學們 code 的排版造成我很嚴重的視力及心理傷害（無誤），這篇正好來聊聊一個好的 coding style 是什麼吧！ 注意：本篇所有論點皆屬個人見解，若不認同請保持理性討論。 什麼是 coding style？Coding style 指的是「程式碼的『寫作』風格」，如同一般的文章風格一樣，程式碼的寫作風格也會因人而異，小至空格的使用、大括號 &amp;#123;&amp;#125; 的位">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-09-25T23:29:05.000Z">
+<meta property="article:modified_time" content="2023-01-29T05:21:36.996Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="coding">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-coding-style" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/coding-style/" class="article-date">
+  <time class="dt-published" datetime="2022-09-25T23:29:05.000Z" itemprop="datePublished">2022-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Others/">Others</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      良好的 Coding style
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上一篇聊到同學們 code 的排版造成我很嚴重的視力及心理傷害（無誤），<br>這篇正好來聊聊一個好的 coding style 是什麼吧！</p>
+<p><em><strong>注意：本篇所有論點皆屬個人見解，若不認同請保持理性討論。</strong></em></p>
+<h2 id="什麼是-coding-style？"><a href="#什麼是-coding-style？" class="headerlink" title="什麼是 coding style？"></a>什麼是 coding style？</h2><p>Coding style 指的是「程式碼的『寫作』風格」，<br>如同一般的文章風格一樣，程式碼的寫作風格也會因人而異，<br>小至空格的使用、大括號 <code>&#123;&#125;</code> 的位置，大至函式的宣告、語法的選擇都會有不同的個人風格。</p>
+<p><strong>那為什麼要強調「好的」coding style？</strong></p>
+<p>如果初學程式設計的人，可能會在教材上看到大部分高階程式語言有個特性——「可讀性」，<br>也就是容易閱讀、容易理解，這也造就了現代的開發協作環境。<br>但我個人認為這樣的特性需要配合良好的撰寫習慣才能發揮到最大，<br>特別是在幫別人 debug 的時候，如果你看到一個雜亂無章、文字過度集中的程式碼，<br>真的會跟我一樣眼睛很痛（o</p>
+<p>以下是我覺得很重要的幾個各語言都通用的 coding style：</p>
+<h3 id="空格與段落"><a href="#空格與段落" class="headerlink" title="空格與段落"></a>空格與段落</h3><p>首先給各位看個範例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,n);    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這個看起來很正常的程式碼有什麼問題呢？</p>
+<p>先不急著解答，我們來看看另一個人寫的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有發現細微的差異了嗎？<br>沒錯，就是<strong>「適當的空格與段落」</strong>。</p>
+<p>在絕大部分語言中，運算子、參數之間的空格，以及分隔段落的空行並非必要，<br>編譯 &#x2F; 直譯器最後都會把這些空格 &#x2F; 行無視掉，<br>那為什麼還要加這些東西增加行數？（關於程式碼行數這又是另一個故事了）</p>
+<p><strong>因為雖然機器看得懂，但人也要看得懂跟舒服啊。</strong></p>
+<p>上面兩個程式碼拿給任一個人看，大多數都會說後者看起來比較舒服，<br>也會比較有耐心（？）幫忙 debug，這說明<strong>沒有適度的排版確實會影響閱讀體驗</strong>；<br>簡單說，你今天要拜託人看程式碼，結果因為你寫得很醜反而讓對方很困擾，<br>這不是造成人家更麻煩、你自己也更麻煩嗎？<br>如同寫字一樣，寫程式碼最基本的就是整齊易讀。</p>
+<p>最後給各位看個非常極端的案例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">binSearch</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> target,<span class="type">int</span> left,<span class="type">int</span> right)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">compare</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line"><span class="type">int</span> arr_size,target;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr_size);</span><br><span class="line"><span class="type">int</span>* <span class="built_in">list</span>=<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> *<span class="built_in">list</span>*arr_size);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;arr_size;i++)&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,(<span class="built_in">list</span>+i));&#125;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;target);</span><br><span class="line"><span class="type">int</span> tar_index=binSearch(<span class="built_in">list</span>,target,<span class="number">0</span>,arr_size<span class="number">-1</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,tar_index);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">compare</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(x&lt;y)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(x==y)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;&#125; </span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">binSearch</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> target,<span class="type">int</span> left,<span class="type">int</span> right)</span>&#123;</span><br><span class="line"><span class="type">int</span> middle=(left+right)/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>,left,middle,right);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>,arr[left],arr[middle],arr[right]);</span><br><span class="line"><span class="keyword">if</span>(left&lt;=right)&#123;</span><br><span class="line"><span class="keyword">switch</span>(compare(arr[middle],target))&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">-1</span>:</span><br><span class="line"><span class="keyword">return</span> binSearch(arr,target,middle+<span class="number">1</span>,right);</span><br><span class="line"><span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line"><span class="keyword">return</span> middle;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="keyword">return</span> binSearch(arr,target,left,middle<span class="number">-1</span>);&#125;&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><del>如果能堅持看完全部的人我佩服你</del></p>
+<h3 id="變數、函數、類別的命名"><a href="#變數、函數、類別的命名" class="headerlink" title="變數、函數、類別的命名"></a>變數、函數、類別的命名</h3><p>這是更多初學者會犯的錯誤——變數<strong>胡亂命名</strong>或是<strong>命名無意義</strong>。</p>
+<p>常常會在一些小朋友寫的程式碼裡面看到諸如 <code>int a, b</code> 之類的命名滿街跑，<br>每次在 debug 都要問好多次「這變數是要存什麼」、「這個 function 是在做什麼」、「這類別是什麼東西」，<br>問到最後甚至會得到這樣的回應：「呃我忘了耶。」<del>忘記了你還叫我 debug？我不會通靈啊ㄍ！</del></p>
+<p>一個好的命名，是能夠讓人一目瞭然這東西的用途，進而可以更快的發現問題所在；<br>一個壞的命名，可能會讓你自己都搞不清楚這在幹嘛，結果就是程式 bug 一大堆，然後你也不知道從何處理。</p>
+<p>所以什麼是好的命名方式？</p>
+<h4 id="1-有意義的名稱"><a href="#1-有意義的名稱" class="headerlink" title="1. 有意義的名稱"></a>1. 有意義的名稱</h4><p>舉個例子：<br>當你的程式需要儲存一筆「金額」的資料，一般人可能就 <code>int a</code> ，<br>最多用註解告訴大家這個 <code>a</code> 是放金額的變數，但誰知道 <code>a</code> 跟金額的關聯？！<br><del>如果在 debug 的時候絕對會聽到以下哀號：「這 a 是在幹嘛啊啊啊（無限慘叫）？」</del><br>所以用有意義的名稱命名是很重要的！<br>以上面的例子，命名為 <code>int mount</code> 會是比較好的做法；若是需要，也可以組合兩個甚至以上的「名詞」作為命名。<br>但也不是所有單字都可以用，盡量避免使用以下的字詞：</p>
+<ul>
+<li>語言保留字（如 Python <code>input</code>）</li>
+<li>單一動詞，通常也會是保留字</li>
+<li>無意義的單字，容易造成干擾（<code>temp</code> 之類的）</li>
+<li>無意義的前綴<br>另外也要避免命名過長，否則溝通上會有困難。</li>
+</ul>
+<h4 id="2-大小寫識別"><a href="#2-大小寫識別" class="headerlink" title="2. 大小寫識別"></a>2. 大小寫識別</h4><p>有意義的名稱固然重要，但若是全部都大寫或全部都小寫，其實也是有缺點的，<br>因為仍然會造成閱讀及識別上的困難。<br>例如：<code>int arraysize</code> 這是個有意義的組合命名，但是不容易閱讀。<br>所以一般在命名時會建議如下：</p>
+<ul>
+<li>變數、函式 &#x2F; 方法：小寫開頭，以底線連結如 <code>first_name</code>（此即 snake case），或是第二個單字首字母大寫如 <code>lastName</code>（即「<strong>駝峰式命名法</strong>」）。</li>
+<li>常數：全部大寫，如 <code>PI = 3.14</code>、<code>MAX_SIZE</code></li>
+<li>類別：大寫開頭，如 <code>Display</code>、<code>Phone</code></li>
+</ul>
+<h4 id="3-命名一致"><a href="#3-命名一致" class="headerlink" title="3. 命名一致"></a>3. 命名一致</h4><p>這裡的一致指的是「定義一致」，也就是對單一對象的定義；<br>舉例：定義使用者叫 <code>user</code>，那有關的其他命名也要以 <code>user</code> 為主，如使用者的存款可以叫 <code>userBalance</code>，<br>不要變成 <code>accountBalance</code> ，否則會造成一定程度的混亂。</p>
+<h4 id="4-術語正確"><a href="#4-術語正確" class="headerlink" title="4. 術語正確"></a>4. 術語正確</h4><p>這沒什麼好說的，就是用正確的專業術語，否則會造成極大的混淆。</p>
+<h3 id="建立-coding-convention"><a href="#建立-coding-convention" class="headerlink" title="建立 coding convention"></a>建立 coding convention</h3><p>說了這麼多，最重要的是建立一個 coding 的慣例（convention），並且整份專案都要遵守這個慣例，<br>這在多人合作的專案中更為重要，否則大家都用自己的方式寫，<br>結果就是會造成每個人都不知道其他人在寫什麼，最後整合的時候就會大混亂。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p><del>好的 coding style 帶你上天堂，壞的 coding style 讓你住套房</del></p>
+<p>寫出一份漂亮的 code 不只對自己維護專案方便，也能讓別人在幫助你的時候更加輕鬆，<br>所以何不從現在開始練習，養成良好的 coding style 吧！</p>
+<p>火山 &#x2F; Kazan<br>2022.09.27</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/coding-style/" data-id="cldird5ee00086zr2amdj28h0" data-title="良好的 Coding style" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/nvim-setting-awesome/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Neovim 設定 - 外觀篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/binary-search/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">資料結構 - 二元搜尋</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

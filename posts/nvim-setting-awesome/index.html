@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Neovim 設定 - 外觀篇 | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要斷更快一週我很抱歉（ 上次我們利用外掛設定了基本的 LSP 跟自動完成功能，不過用著用著就想好像少了些什麼？ 然後高秋看到就吐嘈我說：你為什麼直接用終端機界面，不設定個主題？還有你不覺得有個狀態列的提示你工作會比較方便嗎？我才恍然大悟，原來這種終端機界面的純文字編輯器還有這麼多有趣的外掛！ 於是這兩天在一邊作業翻車的情況下，我又開始了設定（ㄊㄧㄠˊ ㄐㄧㄠˋ）之旅，花了一整天終於搞定以下的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neovim 設定 - 外觀篇">
+<meta property="og:url" content="http://kazan.tw/posts/nvim-setting-awesome/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要斷更快一週我很抱歉（ 上次我們利用外掛設定了基本的 LSP 跟自動完成功能，不過用著用著就想好像少了些什麼？ 然後高秋看到就吐嘈我說：你為什麼直接用終端機界面，不設定個主題？還有你不覺得有個狀態列的提示你工作會比較方便嗎？我才恍然大悟，原來這種終端機界面的純文字編輯器還有這麼多有趣的外掛！ 於是這兩天在一邊作業翻車的情況下，我又開始了設定（ㄊㄧㄠˊ ㄐㄧㄠˋ）之旅，花了一整天終於搞定以下的">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://user-images.githubusercontent.com/2746374/158456281-e8a968c0-e282-4943-b919-3d8454ca0529.png">
+<meta property="og:image" content="https://github.com/kyazdani42/nvim-tree.lua/raw/master/.github/screenshot.png?raw=true">
+<meta property="article:published_time" content="2022-10-04T10:49:06.000Z">
+<meta property="article:modified_time" content="2023-01-29T05:21:36.996Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Neovim">
+<meta property="article:tag" content="Editors">
+<meta property="article:tag" content="Plug-ins">
+<meta property="article:tag" content="Lua">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/2746374/158456281-e8a968c0-e282-4943-b919-3d8454ca0529.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-nvim-setting-awesome" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/nvim-setting-awesome/" class="article-date">
+  <time class="dt-published" datetime="2022-10-04T10:49:06.000Z" itemprop="datePublished">2022-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Technical/">Technical</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Neovim 設定 - 外觀篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p><del>斷更快一週我很抱歉（</del></p>
+<p>上次我們利用外掛設定了基本的 LSP 跟自動完成功能，<br>不過用著用著就想好像少了些什麼？</p>
+<p>然後高秋看到就吐嘈我說：你為什麼直接用終端機界面，不設定個主題？<br>還有你不覺得有個狀態列的提示你工作會比較方便嗎？<br>我才恍然大悟，原來這種終端機界面的純文字編輯器還有這麼多有趣的外掛！</p>
+<p>於是這兩天在一邊作業翻車的情況下，我又開始了設定<del>（ㄊㄧㄠˊ ㄐㄧㄠˋ）</del>之旅，<br>花了一整天終於搞定以下的「玩具」（？</p>
+<p>以下就是一些簡單的紀錄。</p>
+<h2 id="背景主題"><a href="#背景主題" class="headerlink" title="背景主題"></a>背景主題</h2><p>我選用了 <a target="_blank" rel="noopener" href="https://github.com/EdenEast/nightfox.nvim">Nightfox</a> 這個外掛，有很多主題選項，這邊我採用是淺色底的 Dayfox。<br><img src="https://user-images.githubusercontent.com/2746374/158456281-e8a968c0-e282-4943-b919-3d8454ca0529.png" alt="Dayfox"><br>(Source: GitHub README)</p>
+<h2 id="狀態欄"><a href="#狀態欄" class="headerlink" title="狀態欄"></a>狀態欄</h2><p>我用了 <a target="_blank" rel="noopener" href="https://github.com/nvim-lualine/lualine.nvim">lualine</a>，然後改了一些顯示的設定讓他比較乾淨一點</p>
+<h2 id="Tabline"><a href="#Tabline" class="headerlink" title="Tabline"></a>Tabline</h2><p>其實 Neovim 並沒有真正的頁籤（tab），只是把 buffer 當成 tab 的顯示形式。<br>這邊使用了 <a target="_blank" rel="noopener" href="https://github.com/akinsho/bufferline.nvim">bufferline</a>，<br>接著就在這裡翻車了（幹</p>
+<h2 id="字體"><a href="#字體" class="headerlink" title="字體"></a>字體</h2><p>結果我發現 lualine 跟 bufferline 出現了一些沒有正常顯示的字元，<br>查了 README 發現這些外掛使用了 <a target="_blank" rel="noopener" href="https://github.com/kyazdani42/nvim-web-devicons">nvim-web-devicons</a>，如果要正常顯示，本機上需要有安裝可用的 patched font，但我並沒有安裝，<br>後來就選擇了 <a target="_blank" rel="noopener" href="https://www.nerdfonts.com/">Nerd fonts</a> 裡面的 Inconsolata，順便也把終端機跟 VS Code 的字體改了，<br>之後終於可以正常顯示了！\灑花&#x2F;</p>
+<h2 id="File-Explorer"><a href="#File-Explorer" class="headerlink" title="File Explorer"></a>File Explorer</h2><p>你以為純文字編輯器就沒有檔案瀏覽嗎？<br><a target="_blank" rel="noopener" href="https://github.com/kyazdani42/nvim-tree.lua">nvim-tree.lua</a> 是你的好朋友www<br><img src="https://github.com/kyazdani42/nvim-tree.lua/raw/master/.github/screenshot.png?raw=true" alt="nvim-tree"><br>(Source: GitHub README)</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>蛤你說我沒教怎麼裝外掛？<br>給我去看 Neovim 設定的<a href="https://kazan.tw/posts/nvim-setting/">前一篇</a>！</p>
+<p>Neovim 還有很多好玩的外掛，我想我以後還有得研究了w</p>
+<p>火山 &#x2F; Kazan<br>2022.10.07</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="cldird5eh000e6zr2gmm13n29" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/arch-install/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Arch Linux 安裝練習筆記 2022
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/coding-style/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">良好的 Coding style</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

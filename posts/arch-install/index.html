@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Arch Linux 安裝練習筆記 2022 | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要Linux 有許多的發行版（distros），而目前我所使用的發行版是 Debian Linux bookworm&#x2F;sid，儘管已經是非常新的版本，但還是免不了 Debian 的老毛病——套件老舊；加之我準備在家裡架一台 server（不論是遠端主機或 NAS 都需要一台 server），需要更穩定而先進的作業系統，經過考慮與比較（以及煩高秋）後決定改用目前使用者社群最大的 Ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux 安裝練習筆記 2022">
+<meta property="og:url" content="http://kazan.tw/posts/arch-install/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要Linux 有許多的發行版（distros），而目前我所使用的發行版是 Debian Linux bookworm&#x2F;sid，儘管已經是非常新的版本，但還是免不了 Debian 的老毛病——套件老舊；加之我準備在家裡架一台 server（不論是遠端主機或 NAS 都需要一台 server），需要更穩定而先進的作業系統，經過考慮與比較（以及煩高秋）後決定改用目前使用者社群最大的 Ar">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/vm1.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install1.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install2.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install3.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install4.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install5.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install6.png">
+<meta property="og:image" content="http://kazan.tw/posts/arch-install/install_final.png">
+<meta property="article:published_time" content="2022-10-16T22:31:19.000Z">
+<meta property="article:modified_time" content="2023-01-29T05:21:36.996Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Arch">
+<meta property="article:tag" content="VM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kazan.tw/posts/arch-install/vm1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-arch-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/arch-install/" class="article-date">
+  <time class="dt-published" datetime="2022-10-16T22:31:19.000Z" itemprop="datePublished">2022-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux-distros/">Linux distros</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Arch Linux 安裝練習筆記 2022
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>Linux 有許多的發行版（distros），<br>而目前我所使用的發行版是 Debian Linux bookworm&#x2F;sid，<br>儘管已經是非常新的版本，但還是免不了 Debian 的老毛病——套件老舊；<br>加之我準備在家裡架一台 server（不論是遠端主機或 NAS 都需要一台 server），需要更穩定而先進的作業系統，<br>經過考慮與比較（<del>以及煩高秋</del>）後決定改用目前使用者社群最大的 Arch Linux。</p>
+<p>不過 Arch 一向被認為安裝很困難，<br>連 Arch Linux 台灣社群都明言安裝是最大的難關，甚至許多老手都常在裝機時遇上麻煩，<br>所以出現不少安裝指引的文章；<br>這次的文章一方面是提供安裝的一些提醒，一方面也是幫自己留下筆記，<br>那就讓我們來看看到底要如何安裝吧！</p>
+<h2 id="Arch-的特點"><a href="#Arch-的特點" class="headerlink" title="Arch 的特點"></a>Arch 的特點</h2><p>Arch 有四大特點：</p>
+<ul>
+<li>輕量</li>
+<li>簡潔</li>
+<li>社群活躍</li>
+<li>漸進式升級</li>
+</ul>
+<h3 id="輕量"><a href="#輕量" class="headerlink" title="輕量"></a>輕量</h3><p>與其他發行板相比，Arch 並不預裝任何套件，這使得系統可以非常精簡（包含安裝映像都是），所以需要什麼都是由使用者自行決定。</p>
+<h3 id="簡潔"><a href="#簡潔" class="headerlink" title="簡潔"></a>簡潔</h3><p>所有的函式庫、執行檔、文件、設定檔都有嚴格的路徑規範與系統管理，比較不會發生找不到設定檔的「迷路」狀況。</p>
+<h3 id="社群活躍"><a href="#社群活躍" class="headerlink" title="社群活躍"></a>社群活躍</h3><p>雖然絕大部分發行板都是由社群維護，但 Arch 的論壇與 Wiki 可以說是世界上最知名的開源社群，因為有著大量的使用者分享經驗與知識，這使得遇上問題時，Arch 使用者第一件事會是先去查論壇、Wiki。</p>
+<h3 id="漸進式升級"><a href="#漸進式升級" class="headerlink" title="漸進式升級"></a>漸進式升級</h3><p>Arch 採用漸進式升級（rolling upgrade），這會使得套件每天都是最新的版本，也就是說你的 Arch 每天都是 latest wwww</p>
+<p>（本段參考自 <a target="_blank" rel="noopener" href="https://archlinux.tw/">Arch Linux 臺灣社群</a>）</p>
+<h2 id="VM-設定"><a href="#VM-設定" class="headerlink" title="VM 設定"></a>VM 設定</h2><p>本次使用的是 Oracle VM VirtualBox，<br>相信大家最近應該都知道 VirtualBox 要大改版了，不過這不是今天的重點www<br>至於用 VM 練習安裝的好處我也不再贅述，直接進入設定吧：</p>
+<ol>
+<li>開啟 VirtualBox，選擇 “New” 以新增 VM。</li>
+<li>在 “Name” 打上一個名字，建議可以帶有 “arch” 字眼，VirtualBox 會自動將 “Type” 跟 “Version” 調整好。</li>
+<li>Memory size 設定，建議至少 2 GB，但也需要考量到 Host 的記憶體大小，最好先用 <code>free -h</code> 檢查 MEM available，不要超過 available。</li>
+<li>Hard disk 設定，這邊會設定你的虛擬硬碟，預設會是 “Create a virtual disk now” 也就是新增一個虛擬硬碟檔案，直接按下 “Create” 進入設定：<ul>
+<li>首先會是選擇虛擬硬碟的檔案格式，建議使用預設的 VDI (VirtualBox Disk Image) 即可。</li>
+<li>接著是選擇在實體硬碟上的儲存方式，為了避免佔用過多硬碟空間，一般都會建議選用預設的 “Dynamically allocated”（動態定址），這個方式內部是使用 CoW（Copy on Write）實作，也就是在真正寫入一個區塊時才將 VDI 檔案增大並分配空間給 VM guest。</li>
+<li>接下來要選擇 VDI 檔案存放位置跟虛擬的硬碟大小，位置用預設就好，但大小很多人怕會佔用實體硬碟空間所以設定很小，但其實前一項才提到，VDI 配合 dynamically allocated 方式，實際上的檔案大小甚至不到 1 GB，所以大膽的給吧XD，我自己是給了 256 GB，因為太小的話屆時裝機分配給 root 的大小會不夠，就會導致後面即將提到的翻車事件……</li>
+</ul>
+</li>
+<li>以上都設定完了之後，會在 VirtualBox 的 Manager 界面看到剛剛新增的 VM，但還不要高興，因為現在這樣仍然沒有開機媒體，是無法正常將 VM 「開機」的。</li>
+<li>請先準備好 Arch 的安裝碟映像檔（.iso），接著按下 VM 管理界面的 “Settings”，檢查並調整以下細節：<ul>
+<li>System<ul>
+<li>Motherboard<ul>
+<li>Extended Features: 請選擇 “Enable EFI (special OSes only)”</li>
+</ul>
+</li>
+<li>Processor<ul>
+<li>Processor(s): 4 CPUs，建議至少 2 CPUs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Display<ul>
+<li>Screen<ul>
+<li>Video Memory: 使用預設即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Storage<ul>
+<li>Controller: IDE<br>  這裡是重點，預設會是 “Empty”，點選 “Empty”，並按下 “Optical Drive” 旁邊的小圖示，選擇事先準備好的 .iso 檔案，並勾選 “Live CD&#x2F;DVD”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>以上設定都沒有問題後，啟動 VM，進入以下畫面就代表設定成功，我們要開始裝機地獄囉（幹<br><img src="/posts/arch-install/vm1.png" alt="vm1"></li>
+</ol>
+<h2 id="Arch-安裝"><a href="#Arch-安裝" class="headerlink" title="Arch 安裝"></a>Arch 安裝</h2><p>VM 啟動後，開機選單會有很多選項，直接選第一個就好；<br>接著等待以下畫面出現，就代表我們可以開始安裝了：<br><img src="/posts/arch-install/install1.png" alt="install1"></p>
+<p>你可能會問：「怎麼是文字界面？所以我可以直接用了嗎？」或是「怎麼沒有跳出安裝指示？」，<br>這就是為什麼 Arch 被認為安裝很難的原因：<strong>需要自己透過指令界面操作才能安裝系統，沒有圖形安裝界面。</strong><br>沒關係，接下來我會一步一步告訴大家該怎麼做！</p>
+<h3 id="網路測試"><a href="#網路測試" class="headerlink" title="網路測試"></a>網路測試</h3><p>因為 Arch 的安裝映像是<strong>最小安裝</strong>，會需要網路下載所需套件，所以在開始之前一定要測試好網路連線。<br>使用 <code>ping</code> 指令測試網路功能：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping archlinux.org</span><br></pre></td></tr></table></figure>
+<p>如果顯示如下圖，即可以按下 Ctrl+C 中斷並進入下一步：<br><img src="/posts/arch-install/install2.png" alt="install2"><br>這邊因為使用的是 VM，理論上網路連線不會有大問題，有的話就是你動到設定了（o</p>
+<h3 id="硬碟分割、格式化與掛載"><a href="#硬碟分割、格式化與掛載" class="headerlink" title="硬碟分割、格式化與掛載"></a>硬碟分割、格式化與掛載</h3><p>安裝一個新系統最重要的就是分割硬碟跟格式化了！<br><em><strong>特別注意：檔案系統的格式會很大程度影響你的安裝與日後使用，特別是實機上務必謹慎操作！</strong></em></p>
+<h4 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h4><p>如果要分割硬碟，目前有很多種套件可以操作，最常見是用 <code>fdisk</code>，<br>但我個人喜歡用 <code>cfdisk</code>，因為有 UI 而且很直覺，且分割是以 size 而不是 sector 作為參考：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/arch-install/install3.png" alt="install3"><br>如上圖，選擇 “gpt” 後，顯示如下就可以開始分割：<br><img src="/posts/arch-install/install4.png" alt="install4"><br>用 “New” 並輸入磁碟大小以新增分割區，並且使用 “Type” 選擇檔案系統格式（很重要！），最後記得每個分割區都要用 “Write” 寫入，才不會做白工。</p>
+<p>至於分割方式可以參考如下：</p>
+<ol>
+<li><code>/dev/sda1</code>：使用 EFI system，作為開機碟（<code>/boot</code>）使用，基本上給 256 MB 就足夠了，當然如果你的硬碟上本來就有開機磁區就可以略過。</li>
+<li><code>/dev/sda2</code>：使用 Linux Filesystem，作為根目錄（<code>/</code>）使用，<strong>請務必給大一點以便能安裝套件</strong>；因為是 VM 所以可以給更大一點，我會給到 128 GB。（分配太小會導致安裝套件時高機率發生裝不下，我曾經設了 16 GB 結果下面裝字體就硬碟塞爆了……）</li>
+<li><code>/dev/sda3</code>：使用 Linux Filesystem，預計會作為家目錄（<code>/home</code>）使用，先計算好下面的 Swap 空間，剩下就都留給這邊，我給了 123 GB。</li>
+<li><code>/dev/sda4</code>：使用 Linux swap，作為置換分區（Swap），類似 Windows 的 pagefile；當然如果 RAM 足夠可以不給，並且也可以在安裝完成後設定 swap file。這邊建議給跟記憶體大小差不多，我給了 4.7 GB。</li>
+</ol>
+<h4 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h4><p>硬碟分割完成後，還需要格式化才能被識別，<br>首先格式化兩個主要的儲存碟為 <code>ext4</code> 格式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda2</span><br><span class="line">mkfs.ext4 /dev/sda3</span><br></pre></td></tr></table></figure>
+<p>接著要格式化開機碟為 <code>FAT32</code> 格式才能使用 EFI system 開機，當然如果本來就有就可以略過：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F 32 /dev/sda1</span><br></pre></td></tr></table></figure>
+<p><em>提醒：這個指令的輸出只有顯示一行 <code>mkfs.fat</code> 的版本編號是正常的，不必擔心。</em><br>然後格式化 swap：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sda4</span><br></pre></td></tr></table></figure>
+
+<h4 id="掛載"><a href="#掛載" class="headerlink" title="掛載"></a>掛載</h4><p>硬碟分割跟格式化之後，別忘了掛載到系統上才能被使用！<br>如果有出現找不到路徑的警告，就先 <code>mkdir -p &lt;dir&gt;</code> 建立目錄再回來掛載：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line">mount /dev/sda3 /mnt/home</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure>
+<p>另外 swap 也要啟用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /dev/sda4</span><br></pre></td></tr></table></figure>
+
+<p>這些都做完了，終於要正式進入系統安裝的部份了！</p>
+<h3 id="設定套件來源"><a href="#設定套件來源" class="headerlink" title="設定套件來源"></a>設定套件來源</h3><p>什麼又是設定？<br>沒事只差一步了不要緊張，這個沒有設定好就可能會看到美麗的 “request time out” 喔&lt;3</p>
+<p>為什麼要設定來源？簡單來說，今天我在台灣，但是套件從德國下載，你覺得下載套件會快嗎？<br><strong>當然慢到在地上爬啊別作夢了www</strong><br>所以設定優先順序還是非常重要的，<br>這邊有兩種方式提供，這次選用是用第二種：</p>
+<h4 id="手動修改-mirrorlist"><a href="#手動修改-mirrorlist" class="headerlink" title="手動修改 mirrorlist"></a>手動修改 mirrorlist</h4><p>用官方提供的<a target="_blank" rel="noopener" href="https://archlinux.org/mirrorlist/">鏡像站列表</a>，把在台灣的鏡像寫入 <code>/etc/pacman.d/mirrorlist</code> 並給予優先序，就這樣（？</p>
+<h4 id="利用套件自動生成"><a href="#利用套件自動生成" class="headerlink" title="利用套件自動生成"></a>利用套件自動生成</h4><p>可以利用 <code>reflector</code> 這個套件生成最佳排序：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install reflector</span></span><br><span class="line">pacman -Sy reflector</span><br><span class="line"><span class="comment"># Generate mirrorlist</span></span><br><span class="line">reflector --verbose -l 5 --<span class="built_in">sort</span> rate --country <span class="string">&#x27;Taiwan&#x27;</span> --save /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+
+<p>完成這些設定後，我們真的要開始執行「安裝」了。</p>
+<h3 id="安裝系統"><a href="#安裝系統" class="headerlink" title="安裝系統"></a>安裝系統</h3><h4 id="系統核心"><a href="#系統核心" class="headerlink" title="系統核心"></a>系統核心</h4><p>首先要安裝基本的套件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base base-devel</span><br></pre></td></tr></table></figure>
+<p>這行指令會下載並安裝、建立基本系統架構。</p>
+<p>接著是建立 fstab，<br>這個東西提供了 Linux 檔案系統的相關資訊，描述了儲存裝置及其相關磁區如何初始化，與掛載至整個系統，<br>所以非常重要！如果沒有設定好，之後開機肯定會噴掉：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+
+<p>然後，重頭戲來了：<strong>切換至 chroot</strong>。<br><code>chroot</code> 是切換根目錄位置的指令，在這邊是要切換進入「未來」真正的檔案系統以進行設定，<br>並且 Arch 安裝時使用的是 <code>arch-chroot</code>，除了前述的動作還會帶入前置的設定：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<p><strong>提醒大家，<code>chroot</code> 指令要有目標路徑，不然不會動作喔！</strong><br>（<del>我不會承認我在這邊因為忘記打翻車十幾次……</del>）</p>
+<p>切換到新系統之後，為了要讓這個系統成為一個可以獨立運作的作業系統，<br>我們要安裝對於所有 Linux 發行版而言最重要的東西——<strong>Linux kernel</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S linux</span><br></pre></td></tr></table></figure>
+<p><strong>特別注意：安裝核心務必在 chroot 內進行！</strong>（<del>我曾經在 chroot 外就下了安裝核心的指令，然後就翻車了ㄏㄏ</del>）</p>
+<h4 id="設定-root-與-user"><a href="#設定-root-與-user" class="headerlink" title="設定 root 與 user"></a>設定 root 與 user</h4><p>一般來說一個 Linux 的系統裡面會有 root 與至少一個使用者（user），<br>在日常的使用、操作會以 user 身份進行，遇到重大系統操作才需要切換到 root 身份，<br>這是一種基本的系統安全。</p>
+<p>首先我們設定 root 的密碼：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<p><em>提醒：大部分的終端機界面輸入密碼是什麼都不會顯示的，所以若你輸入後看到畫面上沒有任何字元不需要緊張喔！</em></p>
+<p>接著要啟用 sudo group，這是為了以後一般 user 可以進行套件安裝等日常操作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br></pre></td></tr></table></figure>
+<p>找到類似下面這行，刪除 “#” 以取消註解：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># %wheel ALL=(ALL) ALL</span></span><br></pre></td></tr></table></figure>
+<p>（什麼你說你不會用 vim？<del>STFG</del>vim 教學網路上很多喔&lt;3）</p>
+<p><em>注意：如果顯示錯誤「沒有 vim」，可以先安裝 vim 再重新執行：</em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S vim</span><br></pre></td></tr></table></figure>
+
+<p>然後就是新增 user 並給予 sudo 權限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add new user</span></span><br><span class="line">useradd -m &lt;username&gt;</span><br><span class="line"><span class="comment"># Set user&#x27;s password</span></span><br><span class="line">passwd &lt;username&gt;</span><br><span class="line"><span class="comment"># Give user sudo</span></span><br><span class="line">usermod &lt;username&gt; -aG wheel</span><br></pre></td></tr></table></figure>
+
+<h4 id="安裝開機管理程式"><a href="#安裝開機管理程式" class="headerlink" title="安裝開機管理程式"></a>安裝開機管理程式</h4><p>使用 UEFI 的話開機管理預設會使用 <code>systemd-boot</code>，但我喜歡用 GRUB，<br>所以要來安裝跟設定 GRUB 啦！</p>
+<p><em>注意：如果是實機，並且是 Intel&#x2F;AMD 處理器的話，需要先下載 microcode，不過這次是 VM 就先略過了。</em></p>
+<p>首先當然是要下載所需套件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br></pre></td></tr></table></figure>
+<p>接著安裝 grub：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB</span><br></pre></td></tr></table></figure>
+<p>安裝好 GRUB 後，還要記得生成開機設定檔，屆時才會讓 Arch 出現在開機選單上：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<h4 id="啟用網路連線功能"><a href="#啟用網路連線功能" class="headerlink" title="啟用網路連線功能"></a>啟用網路連線功能</h4><p>網路連線我個人習慣使用 <code>NetworkManager</code>，<br>並且我在這邊也翻車過一次，特別拿出來筆記一下。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S networkmanager</span><br></pre></td></tr></table></figure>
+<p>下載與安裝後，因為 NM 是個<strong>服務</strong>，需要在系統內啟用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> NetworkManager.service</span><br><span class="line">systemctl start NetworkManager.service</span><br></pre></td></tr></table></figure>
+
+<p>到這邊其實你已經有一個堪用的 Arch Linux 了，<br>但大部分人還是習慣有圖形界面的桌面環境，所以接著就是來裝桌面環境吧！</p>
+<h3 id="桌面環境"><a href="#桌面環境" class="headerlink" title="桌面環境"></a>桌面環境</h3><p>在 Linux 上，一個堪用的桌面環境至少會有一個 DE 與 DM，<br>DE 是桌面環境，而 DM 則是<del>廣告傳單</del>桌面環境管理（Desktop Manager），<br>主流兩大 DE：GTK+ Gnome 跟 KDE plasma 都有自己的 DM，<br>但這次我打算使用的是輕量簡潔但已經具備基本桌面環境功能的 XFCE，<br>並且配合使用 LightDM 作為 DM。</p>
+<h4 id="安裝-XFCE"><a href="#安裝-XFCE" class="headerlink" title="安裝 XFCE"></a>安裝 XFCE</h4><p>XFCE 建議使用 X11 作為協定，所以除了 XFCE 的套件群組，還需要安裝 <code>xorg-server</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg-server</span><br><span class="line">pacman -Sy xfce4</span><br></pre></td></tr></table></figure>
+
+<h4 id="安裝-LightDM"><a href="#安裝-LightDM" class="headerlink" title="安裝 LightDM"></a>安裝 LightDM</h4><p>一個 DM 除了能執行桌面環境，還要有一些基本的登入登出功能，<br>這邊我使用推薦的 <code>lightdm-gtk-greeter</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S lightdm lightdm-gtk-greeter</span><br></pre></td></tr></table></figure>
+<p>然後測試 LightDM 能不能正常運作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start lightdm.service</span><br></pre></td></tr></table></figure>
+<p>如果有出現圖形登入界面如下代表應該可以正常運作，<br><img src="/posts/arch-install/install5.png" alt="install5"><br>先以 <strong>user</strong> 登入並直接關機。（右上角選單應該有 Shutdown 選項）</p>
+<h3 id="重新啟動測試"><a href="#重新啟動測試" class="headerlink" title="重新啟動測試"></a>重新啟動測試</h3><p>VM 關機後，可以先嘗試移除安裝媒體（映像檔）並再次啟動 VM，<br>如果開機選單有出現 “Arch Linux”，代表 Arch 安裝成功！<br>接著如果正常應該會是終端機登入界面如下圖：<br><img src="/posts/arch-install/install6.png" alt="install6"><br>此時先以 root 登入，並且正式啟用圖形界面：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> lightdm.service</span><br></pre></td></tr></table></figure>
+<p>啟用之後重新啟動（<code>reboot</code>），應該就能看到登入界面囉！</p>
+<h3 id="環境設定"><a href="#環境設定" class="headerlink" title="環境設定"></a>環境設定</h3><p>進入桌面環境後，先開啟終端機（這邊設定也可以先在上一步啟動 LightDM 前先設定），並設定以下資訊：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set timezone and NTP</span></span><br><span class="line">sudo timedatectl set-timezone Asia/Taipei</span><br><span class="line">sudo timedatectl set-ntp <span class="literal">true</span></span><br><span class="line"><span class="comment"># Set locale</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt;&gt; /etc/locale.gen</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;zh_TW.UTF-8 UTF-8&quot;</span> &gt;&gt; /etc/locale.gen</span><br><span class="line">locale-gen</span><br><span class="line">localectl set-locale en_US.UTF-8</span><br><span class="line"><span class="comment"># Set hostname</span></span><br><span class="line">sudo hostnamectl set-hostname &lt;your-host-name&gt;</span><br></pre></td></tr></table></figure>
+<p>設定完成後可以「登出」再重新登入，理論上可以看到更動後的系統設定<br><em>注意：關於語系的設定，也可以直接編輯 <code>/etc/locale.gen</code>，在裡面取消對應語系的註解即可。</em></p>
+<h3 id="安裝中文輸入法與字體"><a href="#安裝中文輸入法與字體" class="headerlink" title="安裝中文輸入法與字體"></a>安裝中文輸入法與字體</h3><p>如果需要中文輸入法與字體，需要額外安裝喔！</p>
+<h4 id="輸入法"><a href="#輸入法" class="headerlink" title="輸入法"></a>輸入法</h4><p>這邊我們使用 RIME：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install RIME and zhuyin-input-method</span></span><br><span class="line">pacman -S ibus ibus-rime rime-bopomofo</span><br><span class="line"><span class="comment"># Set Ibus</span></span><br><span class="line">ibus-setup</span><br></pre></td></tr></table></figure>
+<p>此時應該會跳出提示，確認後會跳出 Ibus 的設定視窗，<br>在 “Input method” 的 tab 內按下 “Add”，選擇 “Chinese”，並選擇 RIME；<br>然後在家目錄下新增一個檔案 <code>.xprofile</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export GTK_IM_MODULE=ibus</span><br><span class="line">export XMODIFIERS=@im=ibus</span><br><span class="line">export QT_IM_MODULE=ibus</span><br><span class="line">ibus-daemon -x -d</span><br></pre></td></tr></table></figure>
+<p>儲存後再次重啟，檢查輸入法有沒有 RIME 中文即可。</p>
+<h4 id="字體"><a href="#字體" class="headerlink" title="字體"></a>字體</h4><p>字體選用許多人都愛用的 Noto-fonts，並且中文 &#x2F; 亞洲字體是 Noto-CJK，加上 emoji：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji</span><br></pre></td></tr></table></figure>
+<p>理論上登出再登入應該就可以使用了。<br><img src="/posts/arch-install/install_final.png" alt="install_final"><br>現在你應該得到一個非常基本的、可以方便操作的 Arch Linux 了，<br>剩下就是安裝你需要的套件，學習如何使用 Arch！</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>本次文章跟安裝的過程，<br>大部份是參考了高手我朋友<a target="_blank" rel="noopener" href="https://www.fanlan.net/">繁嵐</a>寫的<a target="_blank" rel="noopener" href="https://www.fanlan.net/arch-linux-installation-note/index.html">安裝筆記</a>，配合高秋每天被我<del>騷擾</del>討教，<br>終於在昨天成功的安裝到可以使用的狀態了（泣<br>裝了快兩週才終於成功一次，我真的佩服自己的毅力……</p>
+<p>不過第一次嘗試這種安裝的模式其實很有趣，會更了解一點作業系統的架構與運作，<br>也有不少「意外之喜」，<br>相信之後裝 NixOS 肯定會有更多驚喜呢（棒讀</p>
+<p>接下來，要來想我要用 Arch 做什麼事情，之後沒意外大概會有好幾篇文章在紀錄吧。<br>說不定明年鐵人賽主題就是這個了（幹</p>
+<p>火山 &#x2F; Kazan<br>2022.10.17</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/arch-install/" data-id="cldird5eg000d6zr24eeiaqjn" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VM/" rel="tag">VM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/arch-install-bios/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Arch Linux 安裝練習筆記 2022 - BIOS+MBR
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/nvim-setting-awesome/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Neovim 設定 - 外觀篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

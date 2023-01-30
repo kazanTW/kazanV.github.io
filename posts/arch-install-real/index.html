@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Arch Linux 安裝紀錄 2023 | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要天啊上一篇竟然是兩個多月前……，我好爛喔嗚嗚嗚嗚。 經過幾個月的練習（好啦其實不需要那麼久，只是還在學期中我沒那麼多時間備份資料），趁著過年我終於做好準備，正式要跟陪伴我一年多的 Debian 說再見了。（而且我是在除夕夜吃年夜飯時裝機，誰能比我瘋） 這次總體來說非常成功，沒有發生洗掉硬碟重來的情況，感天謝地QQ以下就來簡單敘述過程吧w 設備資訊Computer: Lenovo IdeaP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux 安裝紀錄 2023">
+<meta property="og:url" content="http://kazan.tw/posts/arch-install-real/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要天啊上一篇竟然是兩個多月前……，我好爛喔嗚嗚嗚嗚。 經過幾個月的練習（好啦其實不需要那麼久，只是還在學期中我沒那麼多時間備份資料），趁著過年我終於做好準備，正式要跟陪伴我一年多的 Debian 說再見了。（而且我是在除夕夜吃年夜飯時裝機，誰能比我瘋） 這次總體來說非常成功，沒有發生洗掉硬碟重來的情況，感天謝地QQ以下就來簡單敘述過程吧w 設備資訊Computer: Lenovo IdeaP">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-01-29T16:08:17.000Z">
+<meta property="article:modified_time" content="2023-01-30T11:58:56.443Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Arch">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-arch-install-real" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/arch-install-real/" class="article-date">
+  <time class="dt-published" datetime="2023-01-29T16:08:17.000Z" itemprop="datePublished">2023-01-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux-distros/">Linux distros</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Arch Linux 安裝紀錄 2023
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>天啊上一篇竟然是兩個多月前……，我好爛喔嗚嗚嗚嗚。</p>
+<p>經過幾個月的練習（好啦其實不需要那麼久，只是還在學期中我沒那麼多時間備份資料），趁著過年我終於做好準備，正式要跟陪伴我一年多的 Debian 說再見了。<br>（而且我是在除夕夜吃年夜飯時裝機，<del>誰能比我瘋</del>）</p>
+<p>這次總體來說非常成功，沒有發生洗掉硬碟重來的情況，感天謝地QQ<br>以下就來簡單敘述過程吧w</p>
+<h2 id="設備資訊"><a href="#設備資訊" class="headerlink" title="設備資訊"></a>設備資訊</h2><p>Computer: Lenovo IdeaPad 5 14ALC05<br>CPU: 12 X AMD Ryzen 5 5500U</p>
+<h2 id="前置準備"><a href="#前置準備" class="headerlink" title="前置準備"></a>前置準備</h2><p>首先，實體裝機就需要把安裝光碟映像檔（<code>.iso</code>）寫入硬體內，考量到今日筆電大多數已經沒有光碟機，都會推薦使用 USB 隨身碟（當然也可以用 SD 卡）；<br><code>.iso</code> 檔一般都是用燒錄的方式寫入光碟，至於隨身碟，Windows 上有個好用的小工具 <a target="_blank" rel="noopener" href="https://rufus.ie/zh_TW/">Rufus</a>，可以讓你把 <code>.iso</code> 映像檔燒進隨身碟，<br>不過我當時已經是在使用 Debian Linux，所以直接用 <code>dd</code> 指令寫入就可以了：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">dd</span> <span class="keyword">if</span>=archlinux-x86_64.iso of=/dev/usb_location bs=1M</span><br></pre></td></tr></table></figure>
+<p>再來原本的家目錄資料要<strong>備份</strong>，因為當時裝 Debian 時我並沒有另外切一塊硬碟空間掛載家目錄，而安裝時會洗掉整個硬碟（建議），<br>這花了我兩天的時間才弄好……仔細一看才發現原來我家目錄肥的要死（Orz</p>
+<p>一切做好準備，就該開始了！</p>
+<h2 id="裝機過程"><a href="#裝機過程" class="headerlink" title="裝機過程"></a>裝機過程</h2><p>插入安裝碟，從 UEFI 調整開機順序（USB 優先），重新開機就會進入安裝環境，<br>接著按照<a href="https://kazan.tw/posts/arch-install/">安裝筆記</a>就能成功了！<br>不過需要注意以下事項：</p>
+<h3 id="網路連線"><a href="#網路連線" class="headerlink" title="網路連線"></a>網路連線</h3><p>VM 會用 Host 的網路連線，所以不用特別設定，但是實機要先確認網路連線，<br>筆電一般都有無線網卡，可以利用 <code>iwctl</code> 指令確認網卡與 WiFi 熱點，並進行連線：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iwtcl device list                   // List all network device</span><br><span class="line">iwctl station device get-networks   // List all available networks</span><br><span class="line">iwctl station device connect SSID   // Connect </span><br></pre></td></tr></table></figure>
+<p>不過我自己則是用 <strong>USB 連接手機直接當作乙太網路連線</strong>啦（真的是瘋子）。</p>
+<h3 id="Microcode"><a href="#Microcode" class="headerlink" title="Microcode"></a>Microcode</h3><p>如果使用 Intel&#x2F;AMD 這兩家的 CPU，開機管理程式 GRUB 會需要處理器的微碼（microcode），所以需要安裝相關套件，<br>在開始安裝 GRUB 前，先下載處理器微碼套件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S amd-ucode     // Install microcode</span><br></pre></td></tr></table></figure>
+<p>我使用 AMD 處理器，所以需要 AMD 的微碼套件 <code>amd-ucode</code>；反之若是使用 Intel 的就是裝 <code>intel-ucode</code>，<br>裝好之後再進行 GRUB 安裝與設定。</p>
+<h3 id="硬碟掛載"><a href="#硬碟掛載" class="headerlink" title="硬碟掛載"></a>硬碟掛載</h3><p>這次我決定要讓根目錄與家目錄分開掛載，所以就要按照安裝筆記的分割硬碟，<br>同時要注意掛載硬碟的掛載點（Mount Point）需要指定正確，建議掛載完可以用 <code>lsblk</code> 指令檢查；<br>我在第一次指定時就不小心把 <code>/</code> 的載點指到 <code>/boot</code> 上，導致安裝失敗（空間不足），<br>當我用 <code>lsblk</code> 檢查時，發現我的第一個硬碟區塊同時載了 <code>/</code> 跟 <code>/boot</code>，這個錯誤真的蠻蠢的……</p>
+<h3 id="輸入法"><a href="#輸入法" class="headerlink" title="輸入法"></a>輸入法</h3><p>全部安裝好之後，中文輸入一開始是使用 RIME，但我後來發現自己還是習慣新酷音（Chewing）的注音輸入，<br>所以改安裝 <code>ibus-chewing</code>，同時要啟用輸入法工具。</p>
+<h3 id="圖形界面"><a href="#圖形界面" class="headerlink" title="圖形界面"></a>圖形界面</h3><p>因為用習慣了，加上這台筆電還算新，所以我就繼續沿用 KDE plasma：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syu xorg-server plasma plasma-wayland-session kde-applications</span><br></pre></td></tr></table></figure>
+<p>所以我的圖形界面現在還長的一模一樣XDDD</p>
+<p>另外，在調整輸入法時一直噴掉，意外讓我發現，我的 <code>sddm</code> 竟然正在使用 <strong>Wayland</strong>，<br>只好趕快登出，在登入界面選擇 <strong>X11</strong> 的 session，差點要沒辦法打字了……</p>
+<h3 id="AUR-Helper"><a href="#AUR-Helper" class="headerlink" title="AUR Helper"></a>AUR Helper</h3><p>AUR Helper 是什麼？請參考 Arch Wiki 的<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Arch_User_Repository">說明</a>（全英文，<del>請自行翻譯</del>）；AUR Helper 的選擇很多，我選擇 <strong>yay</strong>（但選自己喜歡的就好），<br>在安裝之前要先啟用 pacman 的 multilib 選項，<br>找到 <code>/etc/pacman.conf</code> 並用編輯器開啟，<br>將以下兩行取消註解（刪除 #）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#[multilib]</span><br><span class="line">#Include = /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>接著需要安裝 <code>git</code>（如果已經安裝可以跳過）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S git</span><br></pre></td></tr></table></figure>
+<p>然後將 yay 的原始碼 clone 到本地：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://aur.archlinux.org/yay.git</span><br></pre></td></tr></table></figure>
+<p>接著就可以編譯並安裝 yay：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> yay</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
+<p><strong>注意：AUR Helper 不要在安裝系統時以 root 身份安裝，最好在安裝好之後以 user 權限操作</strong></p>
+<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p>現在這篇文章，就是在新的 Arch Linux 上打好的！<br>Thank you Debian，但是我要投向新的懷抱了（x</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p><del>不要學我想不開在除夕夜裝機（o</del><br><del>還有不要學我用手機網路還要插線（o</del></p>
+<p>其實 Arch 裝機真的沒有很難，但就真的要習慣指令界面操作，不過我相信會用 Linux 的人肯定都會習慣的（？<br>新年新希望，祈禱換新的發行板能為我帶來新的未來。</p>
+<p>新年恭喜，祝各位今年能夠更光明燦爛。</p>
+<p>火山 &#x2F; Kazan<br>2023.01.30</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="cldird5el000n6zr2ca2q4tr8" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/posts/welcome/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Welcome!</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+          </li>
+        
+          <li>
+            <a href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
