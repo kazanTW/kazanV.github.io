@@ -78,6 +78,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-rust-learning-part1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/rust-learning-part1/" class="article-date">
+  <time class="dt-published" datetime="2023-02-06T15:51:42.000Z" itemprop="datePublished">2023-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/rust-learning-part1/">Rust 學習筆記第一章 - 基礎概念篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上次我們學習如何安裝 Rust，以及利用 Cargo 管理 Rust 專案，<br>今天則是要介紹 Rust 的變數概念、基本資料型別、函式以及控制流程，也就是常見的程式設計概念。</p>
+<h2 id="變數與可變性"><a href="#變數與可變性" class="headerlink" title="變數與可變性"></a>變數與可變性</h2><p>相信大家對「<strong>變數（variable）</strong>」已經有基本概念，今天特別要說明的是在 Rust 中變數的特性。</p>
+<h3 id="變數"><a href="#變數" class="headerlink" title="變數"></a>變數</h3><p>首先建立一個專案叫做 <em>variables</em>，並且編輯 <code>src/main.rs</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">x</span> = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;x is：&#123;x&#125;&quot;</span>);</span><br><span class="line">    x = <span class="number">6</span>;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;x is：&#123;x&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然後 <code>cargo run</code>，應該會得到以下輸出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ cargo run</span><br><span class="line">   Compiling variables v0.1.0 (file:///projects/variables)</span><br><span class="line">error[E0384]: cannot assign twice to immutable variable `x`</span><br><span class="line"> --&gt; src/main.rs:4:5</span><br><span class="line">  |</span><br><span class="line">2 |     <span class="built_in">let</span> x = 5;</span><br><span class="line">  |         -</span><br><span class="line">  |         |</span><br><span class="line">  |         first assignment to `x`</span><br><span class="line">  |         <span class="built_in">help</span>: consider making this binding mutable: `mut x`</span><br><span class="line">3 |     println!(<span class="string">&quot;x 的數值為：&#123;x&#125;&quot;</span>);</span><br><span class="line">4 |     x = 6;</span><br><span class="line">  |     ^^^^^ cannot assign twice to immutable variable</span><br><span class="line"></span><br><span class="line">For more information about this error, try `rustc --explain E0384`.</span><br><span class="line">error: could not compile `variables` due to previous error</span><br></pre></td></tr></table></figure>
+<p>錯誤訊息告訴我們，「cannot assign twice to <strong>immutable</strong> variable」。</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/rust-learning-part1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="cldwx5h6v000pgbr24asl1rej" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-rust-learning-prologue" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/posts/rust-learning-prologue/" class="article-date">
@@ -119,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="cldq7jxkt000n3tr2c9wxg6t2" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="cldwx5h6w000ugbr29rbn9xqa" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
       
       
       
@@ -174,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="cldq7jxkr000j3tr2fsyffqbs" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="cldwx5h6s000jgbr2hdcng2jo" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
       
       
       
@@ -222,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/welcome/" data-id="cldq7jxkt000p3tr23l20268e" data-title="Welcome!" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/welcome/" data-id="cldwx5h6u000ngbr245wn3hmg" data-title="Welcome!" class="article-share-link">Share</a>
       
       
       
@@ -274,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="cldq7jxkq000i3tr2ci0aav32" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="cldwx5h6r000igbr2dftx1xp1" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
       
       
       
@@ -333,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install/" data-id="cldq7jxkn000d3tr2aswb9d60" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install/" data-id="cldwx5h6p000dgbr24il01a58" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
       
       
       
@@ -388,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="cldq7jxko000e3tr2ebm76d92" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="cldwx5h6q000egbr2989oe09r" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
       
       
       
@@ -443,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/coding-style/" data-id="cldq7jxkl00083tr28g0qcmvf" data-title="良好的 Coding style" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/coding-style/" data-id="cldwx5h6m0008gbr2hdae9hst" data-title="良好的 Coding style" class="article-share-link">Share</a>
       
       
       
@@ -501,7 +556,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/binary-search/" data-id="cldq7jxkk00073tr23v6j9n2l" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/binary-search/" data-id="cldwx5h6l0007gbr28yp03rsy" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
       
       
       
@@ -555,73 +610,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="cldq7jxkm00093tr2a4w9a2or" data-title="Neovim 設定" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="cldwx5h6n0009gbr29qw75dfh" data-title="Neovim 設定" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20-java-stack" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/posts/20-java-stack/" class="article-date">
-  <time class="dt-published" datetime="2022-09-20T01:43:41.000Z" itemprop="datePublished">2022-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Learning/">Learning</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/posts/20-java-stack/">Java 實作 Stack - 使用陣列</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p><del>先吐嘈老師根本喪心病狂w</del></p>
-<p>昨天物件導向正式上課跟上機（雖然我都上自己的機），<br>一開始老師簡單介紹了 Java 基本操作，畢竟這年頭 Java 不是必修課（？）；<br>然後就出了三個作業：（萬年不變的）Hello world、運算子運用，<br>最後一個就是今天的主角：<strong>實作 Stack</strong>。</p>
-<p>如果說有學過 Java 可能會知道，<code>java.util</code> 有個 package 叫 <code>Stack</code> 就是用來實作 stack 的，<br>但老師笑容可掬的說：「<strong>請用 array 實作喔。</strong>」<br>差點在教室尖叫。</p>
-<h2 id="基本知識"><a href="#基本知識" class="headerlink" title="基本知識"></a>基本知識</h2><p>Stack &#x2F; 堆疊，顧名思義就是把資料「堆」上去的結構，所以有以下特性：</p>
-<ol>
-<li>先進後出 &#x2F; 後進先出（<strong>LIFO, Last In First Out</strong>）</li>
-<li>除了頭尾外的每個節點都有「前綴」與「後繼」</li>
-</ol>
-<p>對於 stack 的操作通常有以下兩種方法：</p>
-<ul>
-<li>push：將資料存入 stack 頂端</li>
-<li>pop：將 stack 頂端資料移除，頂端移到下一筆資料</li>
-</ul>
-<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2>
-        
-          <p class="article-more-link">
-            <a href="/posts/20-java-stack/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/20-java-stack/" data-id="cldq7jxkg00033tr2acvf0y3k" data-title="Java 實作 Stack - 使用陣列" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
 
     </footer>
   </div>
@@ -666,7 +659,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 10px;">Rust</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
     </div>
   </div>
 
@@ -688,6 +681,10 @@
       <ul>
         
           <li>
+            <a href="/posts/rust-learning-part1/">Rust 學習筆記第一章 - 基礎概念篇</a>
+          </li>
+        
+          <li>
             <a href="/posts/rust-learning-prologue/">Rust 學習筆記 - 序篇</a>
           </li>
         
@@ -701,10 +698,6 @@
         
           <li>
             <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
-          </li>
-        
-          <li>
-            <a href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
           </li>
         
       </ul>
