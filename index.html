@@ -78,6 +78,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-rust-learning-part2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/rust-learning-part2/" class="article-date">
+  <time class="dt-published" datetime="2023-02-11T06:56:18.000Z" itemprop="datePublished">2023-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/rust-learning-part2/">Rust 學習筆記第二章 - 所有權（上）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上次學到了 Rust 的基本概念，這次則進入 Rust 最大的特色————<strong>所有權</strong>。<br>因為比較難理解，我這次打算分上下篇來紀錄，<del>絕對不是寫不完拖更</del>。</p>
+<p><strong>注意：這個概念一定要理解，才能更有效的利用 Rust！</strong></p>
+<h2 id="所有權是什麼？"><a href="#所有權是什麼？" class="headerlink" title="所有權是什麼？"></a>所有權是什麼？</h2><p>我們在學習任何語言時，都會需要知道它們如何使用與管理記憶體的資源，以免造成浪費或者更糟糕的情形。<br>一般而言會有下列兩種流派：</p>
+<ul>
+<li>垃圾回收機制（garbage collector），程式在執行時會尋找不再被使用的記憶體並釋放，例如 Java、Python</li>
+<li>開發者親自分配，在程式碼中明確指出何時分配、何時釋放，例如 C（<del>我相信對很多人來說 <code>malloc</code> 是個無法跨過的夢魘</del>）</li>
+</ul>
+<p>但是 Rust 選擇了第三種方式：由<strong>所有權系統</strong>管理記憶體資源，<br>同時在編譯時檢查規則，違反規則會無法編譯，且規則不影響執行速度。</p>
+<h4 id="這就是-Rust-最大的特點：所有權（Ownership）。"><a href="#這就是-Rust-最大的特點：所有權（Ownership）。" class="headerlink" title="這就是 Rust 最大的特點：所有權（Ownership）。"></a>這就是 Rust 最大的特點：所有權（Ownership）。</h4><p>所以簡單來說，所有權是 Rust 中用以<strong>管理程式記憶體的一系列規則</strong>。</p>
+<p>（註：如果要更深入理解所有權的原理，會需要理解<strong>堆疊（Stack）</strong>與<strong>堆積（Heap）</strong>的運作，可以參考官方文件的<a target="_blank" rel="noopener" href="https://rust-lang.tw/book-tw/ch04-01-what-is-ownership.html#%E5%A0%86%E7%96%8Astack%E8%88%87%E5%A0%86%E7%A9%8Dheap">這篇</a>）</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/rust-learning-part2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/rust-learning-part2/" data-id="cle01ov5y000pn3r25ye32kn8" data-title="Rust 學習筆記第二章 - 所有權（上）" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-rust-learning-part1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/posts/rust-learning-part1/" class="article-date">
@@ -119,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="cldwx5h6v000pgbr24asl1rej" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="cle01ov5x000nn3r25mxngyjg" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
       
       
       
@@ -174,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="cldwx5h6w000ugbr29rbn9xqa" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="cle01ov5z000un3r2hird9wle" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
       
       
       
@@ -229,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="cldwx5h6s000jgbr2hdcng2jo" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="cle01ov5v000jn3r27e4r56ib" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
       
       
       
@@ -277,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/welcome/" data-id="cldwx5h6u000ngbr245wn3hmg" data-title="Welcome!" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/welcome/" data-id="cle01ov5z000vn3r29vc79bax" data-title="Welcome!" class="article-share-link">Share</a>
       
       
       
@@ -329,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="cldwx5h6r000igbr2dftx1xp1" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="cle01ov5u000in3r2979q0037" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
       
       
       
@@ -388,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install/" data-id="cldwx5h6p000dgbr24il01a58" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install/" data-id="cle01ov5r000dn3r27yd73hd7" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
       
       
       
@@ -443,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="cldwx5h6q000egbr2989oe09r" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="cle01ov5s000en3r24dwige67" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
       
       
       
@@ -498,7 +556,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/coding-style/" data-id="cldwx5h6m0008gbr2hdae9hst" data-title="良好的 Coding style" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/coding-style/" data-id="cle01ov5p0008n3r23k8j1qcm" data-title="良好的 Coding style" class="article-share-link">Share</a>
       
       
       
@@ -556,65 +614,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/binary-search/" data-id="cldwx5h6l0007gbr28yp03rsy" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/binary-search/" data-id="cle01ov5k0003n3r2cjdvba50" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-nvim-setting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/posts/nvim-setting/" class="article-date">
-  <time class="dt-published" datetime="2022-09-20T23:51:09.000Z" itemprop="datePublished">2022-09-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Technical/">Technical</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/posts/nvim-setting/">Neovim 設定</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上一篇文章的最後我提到學任何語言首先要先調教好編輯器，<br>這是源自於我那天還沒開始寫任何 code，就先花了半天的時間在處理 Neovim 的設定，特別是 LSP 的設定真的差點搞死我……<br>乾脆寫一篇來紀錄跟分享這個過程。<br><del>我是不是要感謝我的笨拙跟容易翻車讓我常常有題材可以寫文章</del></p>
-<h2 id="為什麼是純文字編輯器"><a href="#為什麼是純文字編輯器" class="headerlink" title="為什麼是純文字編輯器"></a>為什麼是純文字編輯器</h2><p>或許有人會問：「現在新式的 IDE 像是 VS Code 界面漂亮而且使用方便，為什麼還要用純文字編輯器？」<br>這有很多可以說的面向，而且每個人的理由也不盡相同，<br>我自己的話是想要挑戰看看純文字編輯器的功能是不是真的不如 IDE、以及單純覺得好玩（o<br>當然專案開發我自己還是以 IDE 為主，因為視覺化的看專案檔真的比較輕鬆一點。<br>（BTW，雖然我前天 Java 是用 Neovim 寫的，<br>但強者我朋友 a.k.a. 清大怪物高秋表示「Java『專案』」是他數一數二推薦用 IDE 進行開發的語言，<br>因為純用 command line 會很煩躁）</p>
-<h2 id="為什麼是-Neovim"><a href="#為什麼是-Neovim" class="headerlink" title="為什麼是 Neovim"></a>為什麼是 Neovim</h2><p>純文字編輯器主流分成兩大系譜：emacs 跟 vi，那為什麼我選擇了 vi 這支而不是 emacs 系？<br><del>因為 emacs 東西太多了，多到我會尖叫 too much 那種多（關於這個我不打算寫，我會逼高秋寫），</del><br>vi 系的好處，或者說優勢是在 terminal 上比較便利，emacs 只有 GUI 版比較好用，<br>如果想嘗試終端機界面 coding，用 vi 系的體驗會比較好；<br>至於選擇 Neovim 是因為 plug-in 的生態比較活躍，<br>並且自行撰寫 plug-in 也比較容易<del>，這是個 plug-in 的<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1FliVTcX8bQ">新時代</a></del>。</p>
-<h2 id="Neovim-設定調教"><a href="#Neovim-設定調教" class="headerlink" title="Neovim 設定調教"></a>Neovim 設定<del>調教</del></h2><p>好我花太多篇幅寫為什麼了，趕快進入正題（（（</p>
-<p>先把 Neovim 安裝好（怎麼安裝？去搜尋！），接著要來改一下設定檔囉～</p>
-<h3 id="init-vim"><a href="#init-vim" class="headerlink" title="init.vim"></a>init.vim</h3>
-        
-          <p class="article-more-link">
-            <a href="/posts/nvim-setting/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="cldwx5h6n0009gbr29qw75dfh" data-title="Neovim 設定" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li></ul>
 
     </footer>
   </div>
@@ -659,7 +663,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
     </div>
   </div>
 
@@ -681,6 +685,10 @@
       <ul>
         
           <li>
+            <a href="/posts/rust-learning-part2/">Rust 學習筆記第二章 - 所有權（上）</a>
+          </li>
+        
+          <li>
             <a href="/posts/rust-learning-part1/">Rust 學習筆記第一章 - 基礎概念篇</a>
           </li>
         
@@ -694,10 +702,6 @@
         
           <li>
             <a href="/posts/welcome/">Welcome!</a>
-          </li>
-        
-          <li>
-            <a href="/posts/arch-install-bios/">Arch Linux 安裝練習筆記 2022 - BIOS+MBR</a>
           </li>
         
       </ul>

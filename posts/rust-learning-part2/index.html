@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Rust 學習筆記第二章 - 所有權（上） | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要上次學到了 Rust 的基本概念，這次則進入 Rust 最大的特色————所有權。因為比較難理解，我這次打算分上下篇來紀錄，絕對不是寫不完拖更。 注意：這個概念一定要理解，才能更有效的利用 Rust！ 所有權是什麼？我們在學習任何語言時，都會需要知道它們如何使用與管理記憶體的資源，以免造成浪費或者更糟糕的情形。一般而言會有下列兩種流派：  垃圾回收機制（garbage collector）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust 學習筆記第二章 - 所有權（上）">
+<meta property="og:url" content="http://kazan.tw/posts/rust-learning-part2/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要上次學到了 Rust 的基本概念，這次則進入 Rust 最大的特色————所有權。因為比較難理解，我這次打算分上下篇來紀錄，絕對不是寫不完拖更。 注意：這個概念一定要理解，才能更有效的利用 Rust！ 所有權是什麼？我們在學習任何語言時，都會需要知道它們如何使用與管理記憶體的資源，以免造成浪費或者更糟糕的情形。一般而言會有下列兩種流派：  垃圾回收機制（garbage collector）">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-02-11T06:56:18.000Z">
+<meta property="article:modified_time" content="2023-02-11T14:19:12.376Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Rust">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-rust-learning-part2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/rust-learning-part2/" class="article-date">
+  <time class="dt-published" datetime="2023-02-11T06:56:18.000Z" itemprop="datePublished">2023-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Rust 學習筆記第二章 - 所有權（上）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上次學到了 Rust 的基本概念，這次則進入 Rust 最大的特色————<strong>所有權</strong>。<br>因為比較難理解，我這次打算分上下篇來紀錄，<del>絕對不是寫不完拖更</del>。</p>
+<p><strong>注意：這個概念一定要理解，才能更有效的利用 Rust！</strong></p>
+<h2 id="所有權是什麼？"><a href="#所有權是什麼？" class="headerlink" title="所有權是什麼？"></a>所有權是什麼？</h2><p>我們在學習任何語言時，都會需要知道它們如何使用與管理記憶體的資源，以免造成浪費或者更糟糕的情形。<br>一般而言會有下列兩種流派：</p>
+<ul>
+<li>垃圾回收機制（garbage collector），程式在執行時會尋找不再被使用的記憶體並釋放，例如 Java、Python</li>
+<li>開發者親自分配，在程式碼中明確指出何時分配、何時釋放，例如 C（<del>我相信對很多人來說 <code>malloc</code> 是個無法跨過的夢魘</del>）</li>
+</ul>
+<p>但是 Rust 選擇了第三種方式：由<strong>所有權系統</strong>管理記憶體資源，<br>同時在編譯時檢查規則，違反規則會無法編譯，且規則不影響執行速度。</p>
+<h4 id="這就是-Rust-最大的特點：所有權（Ownership）。"><a href="#這就是-Rust-最大的特點：所有權（Ownership）。" class="headerlink" title="這就是 Rust 最大的特點：所有權（Ownership）。"></a>這就是 Rust 最大的特點：所有權（Ownership）。</h4><p>所以簡單來說，所有權是 Rust 中用以<strong>管理程式記憶體的一系列規則</strong>。</p>
+<p>（註：如果要更深入理解所有權的原理，會需要理解<strong>堆疊（Stack）</strong>與<strong>堆積（Heap）</strong>的運作，可以參考官方文件的<a target="_blank" rel="noopener" href="https://rust-lang.tw/book-tw/ch04-01-what-is-ownership.html#%E5%A0%86%E7%96%8Astack%E8%88%87%E5%A0%86%E7%A9%8Dheap">這篇</a>）</p>
+<h2 id="所有權基本規則"><a href="#所有權基本規則" class="headerlink" title="所有權基本規則"></a>所有權基本規則</h2><ul>
+<li><h4 id="Rust-中每個數值都有擁有者（Owner）"><a href="#Rust-中每個數值都有擁有者（Owner）" class="headerlink" title="Rust 中每個數值都有擁有者（Owner）"></a>Rust 中每個數值都有<strong>擁有者（Owner）</strong></h4></li>
+<li><h4 id="同一時間只能有一個擁有者"><a href="#同一時間只能有一個擁有者" class="headerlink" title="同一時間只能有一個擁有者"></a>同一時間只能有一個擁有者</h4></li>
+<li><h4 id="擁有者離開作用域時，數值會被丟棄"><a href="#擁有者離開作用域時，數值會被丟棄" class="headerlink" title="擁有者離開作用域時，數值會被丟棄"></a>擁有者離開<strong>作用域</strong>時，數值會被丟棄</h4></li>
+</ul>
+<h2 id="變數作用域"><a href="#變數作用域" class="headerlink" title="變數作用域"></a>變數作用域</h2><p><strong>作用域（Scope）</strong>，指的是某個項目在<strong>程式內的有效範圍</strong>。</p>
+<p>我們首先看到以下範例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>上述的陳述建立一個字串字面值 <code>s</code>，字串數值被寫死。<br><code>s</code> 的有效範圍是從宣告開始，直到當前作用域結束：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;                       <span class="comment">// s 無效，因為尚未宣告</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="string">&quot;hello&quot;</span>;    <span class="comment">// s 開始有效</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 s</span></span><br><span class="line">&#125;                       <span class="comment">// s 不再有效，因為作用域結束</span></span><br></pre></td></tr></table></figure>
+<p>上面說明了 <code>s</code> 有效的範圍；也就是說，有兩個重要時間點需要注意：</p>
+<ol>
+<li>當 <code>s</code> 進入作用域，它便開始有效</li>
+<li><code>s</code> 持續被視為有效，直到它離開作用域</li>
+</ol>
+<p>對作用域有基本認識後，接著要以此為基礎認識 <code>String</code> 型別。</p>
+<h2 id="String-型別"><a href="#String-型別" class="headerlink" title="String 型別"></a><code>String</code> 型別</h2><p>上面的字串 <code>s</code> 是一個字串字面值（string literals），代表數值被寫死在程式內。<br>這樣的作法是很方便，但因為不可變，在需要改變它的值時（例如收集使用者的輸入）就會變得很麻煩。</p>
+<p>Rust 為此提供了一個方法：字串型別 <code>String</code>。<br>這個型別管理的是在堆積上的資料，所以能夠用來儲存編譯期間未知的文字。<br>延續上面的例子，我們可以利用字串字面值以及 <code>from</code> 函式建立一個 <code>String</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let s = String::from(&quot;hello&quot;);</span><br></pre></td></tr></table></figure>
+<p>如果熟悉 C++，這邊的 <code>::</code> 概念是一樣的，也就是將函式等置於命名空間下，後面還會再討論這個語法。<br>而透過這個方式建立的字串是可以被改變的：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    s.<span class="title function_ invoke__">push_str</span>(<span class="string">&quot;, world!&quot;</span>); <span class="comment">// push_str() 將字面值加到字串後面</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 這會印出 `hello, world!`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以為什麼兩種方式建立了同樣的字串，但一個可變一個不行？這主要來自兩者對記憶體的操作方式。</p>
+<h2 id="記憶體與分配"><a href="#記憶體與分配" class="headerlink" title="記憶體與分配"></a>記憶體與分配</h2><p>字串字面值之所以效率高，是因為編譯時我們已經知道內容，能夠寫死在執行檔內；<br>但這樣的優勢也是來自不可變性，一旦遇上大小未知或可能改變的文字，這樣的優勢就會立刻消失。</p>
+<p>而 <code>String</code> 型別為了支援可變大小，會在堆積上分配一塊未知大小的記憶體，實作上會是這樣子：</p>
+<ul>
+<li>執行時需要請求記憶體</li>
+<li>當不再需要這個 <code>String</code> 時，需要把記憶體歸還<br>在上面的例子，<code>String::from</code> 已經完成請求記憶體的部份，這跟許多其他語言類似；<br>但歸還的部份就有所不同了。</li>
+</ul>
+<p>一般而言，如果有 GC，GC 會自動追蹤與清理不再被使用的記憶體；<br>沒有 GC 則需要自己手動釋放（例如 C 的 <code>free()</code>），<br>而這會是一個非常複雜而艱鉅的任務，必須精準的配對分配與釋放，否則會發生嚴重的錯誤。</p>
+<p>但 Rust 仍然選擇與眾不同的方式：<strong>記憶體在擁有者離開作用域會自動釋放</strong>。<br>我們修改前面的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>); <span class="comment">// s 在此開始視為有效</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 s</span></span><br><span class="line">&#125;                                  <span class="comment">// 此作用域結束</span></span><br><span class="line">                                   <span class="comment">// s 不再有效</span></span><br></pre></td></tr></table></figure>
+<p>前面有提過，<code>s</code> 的作用域在 <code>&#123;&#125;</code> 中，當離開該作用域，<code>s</code> 便不再有效。<br>而當 <code>s</code> 離開作用域時，Rust 會<strong>自動呼叫 <code>drop</code> 將記憶體歸還</strong>。<br>（如果你熟悉 C++ 的 RAII，那麼 <code>drop</code> 你就會很熟悉。）</p>
+<p>接著我們要討論一些複雜的情形。</p>
+<h3 id="移動（Move）、複製（Clone）、拷貝（Copy）"><a href="#移動（Move）、複製（Clone）、拷貝（Copy）" class="headerlink" title="移動（Move）、複製（Clone）、拷貝（Copy）"></a>移動（Move）、複製（Clone）、拷貝（Copy）</h3><p>數個變數可以有不同方式與<strong>相同</strong>的資料互動，先看看以下範例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">x</span> = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span> = x;</span><br></pre></td></tr></table></figure>
+<p>上述的範例非常簡單，將數值 <code>5</code> 指定給變數 <code>x</code>，接著 copy 一份給 <code>y</code>，<br>並且在記憶體中，這兩個變數都會進入<strong>堆疊</strong>。</p>
+<p>再看看下面的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = s1;</span><br></pre></td></tr></table></figure>
+<p>乍看之下可能會認為，上面做的與前面一模一樣，也就是 copy <code>s1</code> 的內容給 <code>s2</code>。<br>但在 Rust 中並非如此。</p>
+<p>Rust 的 <code>String</code> 架構是由三個部份：指向儲存內容記憶體的指標 <code>ptr</code>、長度 <code>len</code>、容量 <code>capacity</code>，在此先不討論長度與容量的差異；<br><code>String</code> 儲存的資訊是放在<strong>堆疊</strong>上，但是指向的資料內容則是在<strong>堆積</strong>上。<br>上面的 <code>s2 = s1</code>，確實是 copy 資料，但 copy 的部份是 <code>String</code> 儲存的資訊，也就是指標、長度與容量；<br>否則若是真的直接拷貝資料內容，會產生巨大的「花費」，使得堆積上的資料累積越來越多，這對效能會有非常明顯的影響。</p>
+<p>另外，前面有提到當變數離開作用域，Rust 會自動呼叫 <code>drop</code> 釋放記憶體；<br>但若是有兩個指標同時指向同一記憶體，在釋放時便會發生「兩個變數都嘗試釋放同一塊記憶體」，<br>這會導致<strong>雙重釋放（double free）</strong>錯誤發生，進而可能造成記憶體損壞、產生安全漏洞。</p>
+<p>為了預防這種情況，Rust 會再做一件事：在 <code>let s2 = s1;</code> 後，<code>s1</code> 便<strong>不再有效</strong>，<br>所以在 <code>s1</code> 離開作用域時就不會進行釋放。<br>我們可以透過下面的範例驗證這件事：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s2</span> = s1;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;, world!&quot;</span>, s1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正常來說這段程式碼無法被編譯，並且會得到下列的錯誤：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cargo run</span><br><span class="line">   Compiling ownership v0.1.0 (file:///projects/ownership)</span><br><span class="line">error[E0382]: borrow of moved value: `s1`</span><br><span class="line"> --&gt; src/main.rs:5:28</span><br><span class="line">  |</span><br><span class="line">2 |     <span class="built_in">let</span> s1 = String::from(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">  |         -- move occurs because `s1` has <span class="built_in">type</span> `String`, <span class="built_in">which</span> does not implement the `Copy` trait</span><br><span class="line">3 |     <span class="built_in">let</span> s2 = s1;</span><br><span class="line">  |              -- value moved here</span><br><span class="line">4 |</span><br><span class="line">5 |     println!(<span class="string">&quot;&#123;&#125;, world!&quot;</span>, s1);</span><br><span class="line">  |                            ^^ value borrowed here after move</span><br><span class="line">  |</span><br><span class="line">  = note: this error originates <span class="keyword">in</span> the macro `<span class="variable">$crate</span>::format_args_nl` <span class="built_in">which</span> comes from the expansion of the macro `println` (<span class="keyword">in</span> Nightly builds, run with -Z macro-backtrace <span class="keyword">for</span> more info)</span><br><span class="line"></span><br><span class="line">For more information about this error, try `rustc --explain E0382`.</span><br><span class="line">error: could not compile `ownership` due to previous error</span><br></pre></td></tr></table></figure>
+
+<p>如果聽過<strong>淺拷貝（shallow copy）</strong>與<strong>深拷貝（deep copy）</strong>，會發現上面的行為與淺拷貝非常相像，<br>但是 Rust 在拷貝資訊的同時會<strong>無效</strong>第一個變數，所以在 Rust 中，這樣的行為稱為<strong>移動（Move）</strong>。</p>
+<p>若是真的想要深拷貝堆積上的資料，Rust 仍然有提供方法：<strong>複製或作克隆）</strong> <code>clone</code>，<br>這是一個方法（method）：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s2</span> = s1.<span class="title function_ invoke__">clone</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;s1 = &#123;&#125;, s2 = &#123;&#125;&quot;</span>, s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這就能正常執行了，因為 <code>s2</code> 是深拷貝了 <code>s1</code> 在堆積上的資料內容，或者可以說另外宣告了一個變數。<br>但 <code>clone</code> 很「昂貴」，請謹慎使用。</p>
+<p>前面都在說堆積上的資料，那如果是在堆疊上的資料呢？</p>
+<p>先來看以下的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s2</span> = s1.<span class="title function_ invoke__">clone</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;s1 = &#123;&#125;, s2 = &#123;&#125;&quot;</span>, s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>照理來說，依據上面所學，因為沒有呼叫 <code>clone</code>，<code>x</code> 應該已經變為無效，但程式會<strong>正常執行</strong>。<br>可以先自己想想看為什麼？</p>
+<p>正確的原因是，因為在編譯時，整數這樣的型別是已知大小，只會存在堆疊上，<br>故拷貝實際數值是很快的，也失去「無效化」的理由。<br>Rust 有種特殊標記：**<code>Copy</code> 特徵（trait，後續會提及）**，<br>如果有這個特徵，那麼變數賦值給其他變數後仍然保持有效；<br>反之，若是型別實作了 <code>Drop</code> 特徵，則不會被允許擁有 <code>Copy</code> 特徵，這是避免衝突與錯誤產生。<br>以下是實作了 <code>Copy</code> 特徵的舉例：</p>
+<ul>
+<li>所有純量型別（整數、浮點數、布林、字元）</li>
+<li>元組可以實作，但前提是包含的型別也都有實作（例如 <code>(i32, String)</code> 就不會有 <code>Copy</code>）</li>
+</ul>
+<h2 id="所有權與函式"><a href="#所有權與函式" class="headerlink" title="所有權與函式"></a>所有權與函式</h2><p>與賦值給變數類似，傳遞變數給函式會是移動或拷貝；<br>下面的範例說明變數如何進入且離開作用域：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);  <span class="comment">// s 進入作用域</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">takes_ownership</span>(s);             <span class="comment">// s 的值進入函式</span></span><br><span class="line">                                    <span class="comment">// 所以 s 也在此無效</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">x</span> = <span class="number">5</span>;                      <span class="comment">// x 進入作用域</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">makes_copy</span>(x);                  <span class="comment">// x 本該移動進函式裡</span></span><br><span class="line">                                    <span class="comment">// 但 i32 有 Copy，所以 x 可繼續使用</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// x 在此離開作用域，接著是 s。但因為 s 的值已經被移動了</span></span><br><span class="line">  <span class="comment">// 它不會有任何動作</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">takes_ownership</span>(some_string: <span class="type">String</span>) &#123; <span class="comment">// some_string 進入作用域</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, some_string);</span><br><span class="line">&#125; <span class="comment">// some_string 在此離開作用域並呼叫 `drop`</span></span><br><span class="line">  <span class="comment">// 佔用的記憶體被釋放</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">makes_copy</span>(some_integer: <span class="type">i32</span>) &#123; <span class="comment">// some_integer 進入作用域</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, some_integer);</span><br><span class="line">&#125; <span class="comment">// some_integer 在此離開作用域，沒有任何動作發生</span></span><br></pre></td></tr></table></figure>
+<p>若是嘗試在呼叫 <code>take_ownership</code> 後使用 <code>s</code>，會發生編譯錯誤。</p>
+<h2 id="回傳值與作用域"><a href="#回傳值與作用域" class="headerlink" title="回傳值與作用域"></a>回傳值與作用域</h2><p>回傳值同樣可以轉移所有權，見範例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="title function_ invoke__">gives_ownership</span>();         <span class="comment">// gives_ownership 移動它的回傳值給 s1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s2</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;哈囉&quot;</span>);     <span class="comment">// s2 進入作用域</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s3</span> = <span class="title function_ invoke__">takes_and_gives_back</span>(s2);  <span class="comment">// s2 移入 takes_and_gives_back</span></span><br><span class="line">                                        <span class="comment">// 該函式又將其回傳值移到 s3</span></span><br><span class="line">&#125; <span class="comment">// s3 在此離開作用域並釋放</span></span><br><span class="line">  <span class="comment">// s2 已被移走，所以沒有任何動作發生</span></span><br><span class="line">  <span class="comment">// s1 離開作用域並釋放</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">gives_ownership</span>() <span class="punctuation">-&gt;</span> <span class="type">String</span> &#123;             <span class="comment">// gives_ownership 會將他的回傳值</span></span><br><span class="line">                                             <span class="comment">// 移動給呼叫它的函式</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">some_string</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;你的字串&quot;</span>); <span class="comment">// some_string 進入作用域</span></span><br><span class="line"></span><br><span class="line">    some_string                              <span class="comment">// 回傳 some_string 並移動給</span></span><br><span class="line">                                             <span class="comment">// 呼叫它的函式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此函式會取得一個 String 然後回傳它</span></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">takes_and_gives_back</span>(a_string: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">String</span> &#123; <span class="comment">// a_string 進入作用域</span></span><br><span class="line"></span><br><span class="line">    a_string  <span class="comment">// 回傳 a_string 並移動給呼叫的函式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>記住，變數所有權會遵從相同模式：<strong>賦值給其他變數就會移動</strong>。</p>
+<p>若是想要讓函式使用數值卻不取得所有權，同時回傳它們自己產生的值呢？<br>Rust 可以利用元組回傳多個數值：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> (s2, len) = <span class="title function_ invoke__">calculate_length</span>(s1);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#x27;&#123;&#125;&#x27; 的長度為 &#123;&#125;。&quot;</span>, s2, len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">calculate_length</span>(s: <span class="type">String</span>) <span class="punctuation">-&gt;</span> (<span class="type">String</span>, <span class="type">usize</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">length</span> = s.<span class="title function_ invoke__">len</span>(); <span class="comment">// len() 回傳 String 的長度</span></span><br><span class="line"></span><br><span class="line">    (s, length)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不過，這樣做雖然能達到要求，但還是太過繁瑣。<br>到底有沒有什麼方法可以乾淨的在不轉移所有權的同時使用數值？</p>
+<p>這就是下一篇要提的：引用（reference）。</p>
+<p>（待續）<br>2023.02.11</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/rust-learning-part2/" data-id="cle01ov5y000pn3r25ye32kn8" data-title="Rust 學習筆記第二章 - 所有權（上）" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/posts/rust-learning-part1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Rust 學習筆記第一章 - 基礎概念篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/rust-learning-part2/">Rust 學習筆記第二章 - 所有權（上）</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-part1/">Rust 學習筆記第一章 - 基礎概念篇</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-prologue/">Rust 學習筆記 - 序篇</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+          <li>
+            <a href="/posts/welcome/">Welcome!</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
