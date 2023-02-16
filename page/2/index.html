@@ -78,6 +78,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-binary-search" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/binary-search/" class="article-date">
+  <time class="dt-published" datetime="2022-09-23T05:55:49.000Z" itemprop="datePublished">2022-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/binary-search/">資料結構 - 二元搜尋</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>這星期資結終於上機了，上週直接爽放一天假期ww<br>不過這周一上課就是混沌地獄，一堆人直接忘記 C 怎麼寫……（助教：完蛋了之後更難我豈不是忙死）<br>有人直接問怎麼輸入資料……連 <code>scanf()</code> 都忘記了嗎（尖叫<br><del>至於 VLA（<code>int array[n]</code>）跟 code 不排版就算了吧（點菸</del></p>
+<p>慣例的廢話就到這邊，接著來聊聊這周的題目——二元搜尋法吧。</p>
+<h2 id="基本知識"><a href="#基本知識" class="headerlink" title="基本知識"></a>基本知識</h2><p>一般我們在一串資料中要搜尋特定的一筆資料，直覺的方式就是從頭開始一筆筆比對，也就是所謂的線性搜尋，<br>但這樣需要花費的可能時間會非常的長，如果目標在最後一筆就會找非常久；<br>二元搜尋法則是利用「中間值」的概念，在一串已經<strong>排序過</strong>的資料中，每次都比對一定範圍的「中間」索引，<br>若不是目標資料的話則以中間值與其中一端為範圍，即縮小一半的搜尋區間，<br>然後不斷循環這樣的搜尋方式，直到找到目標。<br>這個方法相較於線性搜尋的好處是，搜尋的可能時間最壞會指數減少，<br>以演算法要求的時間複雜度而言，這是一個較好的解決方案。</p>
+<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><ul>
+<li><em>輸入：輸入一個陣列長度，並依序輸入整數陣列資料，最後輸入一個搜尋目標。</em></li>
+<li><em>輸出：每一輪搜尋都輸出兩行，第一行為左右邊界及中間值的索引值，第二行為對應的資料；若最後有找到目標資料，輸出其索引值。</em></li>
+<li><em><strong>注意：只能使用 C 或 C++，並請使用「遞迴」方式搜尋；另外本次的測資都是「可以找到目標」，不需要考慮找不到的情形。</strong></em></li>
+</ul>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>這邊就用我們的老朋友 C 來實作（C++？對不起我們不熟）。</p>
+<h3 id="注意-VLA"><a href="#注意-VLA" class="headerlink" title="注意 VLA"></a>注意 VLA</h3>
+        
+          <p class="article-more-link">
+            <a href="/posts/binary-search/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/binary-search/" data-id="cle6ur56f0007t3r2eejehs8r" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-nvim-setting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/posts/nvim-setting/" class="article-date">
@@ -118,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="cle01ov5q0009n3r2a777csnx" data-title="Neovim 設定" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="cle6ur56i0009t3r2fm2t01ny" data-title="Neovim 設定" class="article-share-link">Share</a>
       
       
       
@@ -180,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/20-java-stack/" data-id="cle01ov5o0007n3r27t715erm" data-title="Java 實作 Stack - 使用陣列" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/20-java-stack/" data-id="cle6ur56b0003t3r2av8ybh4q" data-title="Java 實作 Stack - 使用陣列" class="article-share-link">Share</a>
       
       
       
@@ -234,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/16-site-intro/" data-id="cle01ov5g0001n3r24e995zz0" data-title="網站基礎架構" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/16-site-intro/" data-id="cle6ur5670001t3r25q8phw4v" data-title="網站基礎架構" class="article-share-link">Share</a>
       
       
       
@@ -283,7 +341,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Arch/" style="font-size: 20px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 15px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 15px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 15px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+      <a href="/tags/Arch/" style="font-size: 16.67px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 13.33px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 13.33px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 13.33px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 13.33px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
     </div>
   </div>
 
@@ -305,6 +363,10 @@
       <ul>
         
           <li>
+            <a href="/posts/rust-learning-part3/">Rust 學習筆記第三章 - 所有權（下）</a>
+          </li>
+        
+          <li>
             <a href="/posts/rust-learning-part2/">Rust 學習筆記第二章 - 所有權（上）</a>
           </li>
         
@@ -318,10 +380,6 @@
         
           <li>
             <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
-          </li>
-        
-          <li>
-            <a href="/posts/welcome/">Welcome!</a>
           </li>
         
       </ul>

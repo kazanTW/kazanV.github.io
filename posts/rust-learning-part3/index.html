@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Rust 學習筆記第三章 - 所有權（下） | Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前情提要接續上篇，我們想要讓函式使用變數的數值，同時不希望它取得所有權，也嘗試透過回傳元組解決，但這樣還是太繁瑣，很不 Rust（o到底該如何同時達到乾淨而且不失去變數所有權呢？ 這就是今天要討論的第一件事：引用與借用。 引用（Reference）在前面的例子，我們會失去所有權是因為把變數傳遞給函式，但若是只提供數值呢？ 這就是引用的作用：追蹤、存取特定記憶體位址的資訊，同時該位址仍被其他變數擁有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust 學習筆記第三章 - 所有權（下）">
+<meta property="og:url" content="http://kazan.tw/posts/rust-learning-part3/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="前情提要接續上篇，我們想要讓函式使用變數的數值，同時不希望它取得所有權，也嘗試透過回傳元組解決，但這樣還是太繁瑣，很不 Rust（o到底該如何同時達到乾淨而且不失去變數所有權呢？ 這就是今天要討論的第一件事：引用與借用。 引用（Reference）在前面的例子，我們會失去所有權是因為把變數傳遞給函式，但若是只提供數值呢？ 這就是引用的作用：追蹤、存取特定記憶體位址的資訊，同時該位址仍被其他變數擁有">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-02-16T01:40:33.000Z">
+<meta property="article:modified_time" content="2023-02-16T08:43:22.702Z">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="Rust">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-rust-learning-part3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/rust-learning-part3/" class="article-date">
+  <time class="dt-published" datetime="2023-02-16T01:40:33.000Z" itemprop="datePublished">2023-02-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Rust 學習筆記第三章 - 所有權（下）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>接續上篇，我們想要讓函式使用變數的數值，同時不希望它取得所有權，<br>也嘗試透過回傳元組解決，但這樣還是太繁瑣，很不 Rust（o<br>到底該如何同時達到乾淨而且不失去變數所有權呢？</p>
+<p>這就是今天要討論的第一件事：<strong>引用與借用</strong>。</p>
+<h2 id="引用（Reference）"><a href="#引用（Reference）" class="headerlink" title="引用（Reference）"></a>引用（Reference）</h2><p>在前面的例子，我們會失去所有權是因為把變數傳遞給函式，<br>但若是只提供數值呢？</p>
+<p>這就是引用的作用：追蹤、存取特定記憶體位址的資訊，同時該位址仍被其他變數擁有。<br>另外，Rust 的引用保證所指向的特定型別數值一定有效（避免如 C 可能發生空指標的狀況）。</p>
+<p>我們可以更改上篇的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">len</span> = <span class="title function_ invoke__">calculate_length</span>(&amp;s1);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#x27;&#123;&#125;&#x27; 的長度為 &#123;&#125;。&quot;</span>, s1, len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">calculate_length</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">usize</span> &#123;</span><br><span class="line">    s.<span class="title function_ invoke__">len</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們會注意到元組都被拿掉了；<br>同時，我們會傳遞 <code>&amp;s1</code> 給函式，這裡的 <code>&amp;</code> 就是引用，<br>引用允許我們不用獲取所有權也能使用數值。</p>
+<p><code>&amp;s1</code> 這個語法建立一個指向 <code>s1</code> 數值的引用，<br>但是因為沒有所有權，所以引用不再被使用後 <code>s1</code> 並不會被丟棄。<br>我們稱呼這樣的動作為<strong>借用（borrowing）</strong>，因為與現實的借用行為非常接近。</p>
+<p>一般而言借用只能引用資料，並不可以修改資料，否則會出現錯誤，<br>這被稱為不可變引用；<br>但是跟變數一樣，若是想變更借用的數值，可以使用<strong>可變引用</strong>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">change</span>(&amp;<span class="keyword">mut</span> s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">change</span>(some_string: &amp;<span class="keyword">mut</span> <span class="type">String</span>) &#123;</span><br><span class="line">    some_string.<span class="title function_ invoke__">push_str</span>(<span class="string">&quot;, world&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先變數本身需要是可變的，才能在呼叫時建立可變引用 <code>&amp;mut</code>。<br>可變引用最大的限制，在於如果對一個數值有可變引用，<br>便無法再對該數值有其他任何引用，也就是不能建立兩個以上的可變引用。<br>學到這裡確實好奇，其他大多數語言都允許直接更改，但為什麼 Rust 不行？</p>
+<p>回到最前面，Rust 非常強調資料的安全性，所以在引用行為也設下幾道限制，<br>避免在編譯時發生<strong>資料競爭（data races）</strong>：</p>
+<ul>
+<li>同時有兩個以上的指標存取同一資料</li>
+<li>至少有一個指標在寫入資料</li>
+<li>沒有針對資料的同步存取機制<br>資料競爭容易引發未定義行為（undefined behavior），學過的人應該都知道這是非常不安全的。</li>
+</ul>
+<p>那如果真的想要有多個可變引用該怎麼做？<br>同樣很簡單，利用 <code>&#123;&#125;</code> 建立新的作用域就好了：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">r1</span> = &amp;<span class="keyword">mut</span> s;</span><br><span class="line">    &#125; <span class="comment">// r1 離開作用域，所以建立新的引用也不會有問題</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">r2</span> = &amp;<span class="keyword">mut</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上，只要不是同時擁有，就不會發生資料競爭。</p>
+<p>同樣地，在可變引用與不可變引用的組合中也存在類似規則，<br>如以下錯誤的程式碼：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">r1</span> = &amp;s; <span class="comment">// 沒問題</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">r2</span> = &amp;s; <span class="comment">// 沒問題</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">r3</span> = &amp;<span class="keyword">mut</span> s; <span class="comment">// 很有問題！</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;, &#123;&#125;, and &#123;&#125;&quot;</span>, r1, r2, r3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明顯，Rust <strong>不允許</strong>擁有不可變引用的同時擁有可變引用，<br>因為不可變引用的擁有者應該不會希望有人能夠擅自改變數值www；<br>不過同時有多個不可變引用就沒有問題，因為沒有任何人能夠改變資料。</p>
+<p>注意，引用的作用域始於宣告，終於最後一次被使用；<br>所以其實能夠允許不可變引用與可變引用出現在同一份程式碼內，但兩者作用域必須分開。</p>
+<h3 id="迷途引用"><a href="#迷途引用" class="headerlink" title="迷途引用"></a>迷途引用</h3><p>前面提過，有別於其他語言可能發生釋放資源但指標仍然存在，導致迷途指標（dangling pointer）發生，<br>Rust 的編譯器會保證引用始終有效，也就是說若是有引用，編譯器會確保資料不會提前離開作用域。</p>
+<p>我們可以透過以下程式碼理解 Rust 如何阻止迷途引用：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">reference_to_nothing</span> = <span class="title function_ invoke__">dangle</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">dangle</span>() <span class="punctuation">-&gt;</span> &amp;<span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &amp;s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>若是直接執行會看到錯誤訊息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ cargo run</span><br><span class="line">   Compiling ownership v0.1.0 (file:///projects/ownership)</span><br><span class="line">error[E0106]: missing lifetime specifier</span><br><span class="line"> --&gt; src/main.rs:5:16</span><br><span class="line">  |</span><br><span class="line">5 | fn dangle() -&gt; &amp;String &#123;</span><br><span class="line">  |                ^ expected named lifetime parameter</span><br><span class="line">  |</span><br><span class="line">  = <span class="built_in">help</span>: this <span class="keyword">function</span><span class="string">&#x27;s return type contains a borrowed value, but there is no value for it to be borrowed from</span></span><br><span class="line"><span class="string">help: consider using the `&#x27;</span>static` lifetime</span><br><span class="line">  |</span><br><span class="line">5 | fn dangle() -&gt; &amp;<span class="string">&#x27;static String &#123;</span></span><br><span class="line"><span class="string">  |                 +++++++</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">For more information about this error, try `rustc --explain E0106`.</span></span><br><span class="line"><span class="string">error: could not compile `ownership` due to previous error</span></span><br></pre></td></tr></table></figure>
+<p>其中出現一個陌生的名詞（也可能已經在其他語言看過）：生命週期（lifetime），<br>可以先略過（同樣後面有專門討論的主題）；<br>重點在於這句：<br><code>this function&#39;s return type contains a borrowed value, but there is no value for it to be borrowed from</code>。<br>簡單來說，<code>s</code> 是在 <code>dangle</code> 內產生，當 <code>dangle</code> 作用域結束，<code>s</code> 會被釋放，<br>此時我們卻嘗試回傳這個目標被釋放的引用，這時引用指向的是已經無效的 <code>String</code>，<br>在其他語言可能還有辦法編譯，但 Rust 的檢查機制不會允許，也算是一層安全保障。</p>
+<p>若是要解決上面的問題，改為直接回傳 <code>String</code> 就可以了：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">string</span> = <span class="title function_ invoke__">no_dangle</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">no_dangle</span>() <span class="punctuation">-&gt;</span> <span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這會使所有權被轉移出去，不會釋放任何數值。</p>
+<h3 id="引用規則"><a href="#引用規則" class="headerlink" title="引用規則"></a>引用規則</h3><p>先總結一下前面討論的引用規則：</p>
+<ul>
+<li>同一時間只能有<strong>一個可變引用</strong>，或是<strong>任意數量的不可變引用</strong></li>
+<li>引用必須<strong>永遠有效</strong><br>這是引用的基本原則。</li>
+</ul>
+<p>接下來我們可能會遇到一個問題：<br>我想要取得 &#x2F; 描述一個字串的其中一部份，那我該怎麼做？<br>這就是下面要討論的特殊引用方式：<strong>切片</strong>。</p>
+<h2 id="切片（Slice）"><a href="#切片（Slice）" class="headerlink" title="切片（Slice）"></a>切片（Slice）</h2><p>切片是一個可以引用一串集合中的元素序列，而不需要引用整個集合的方法，<br>與引用相同，切片並<strong>不會取得所有權</strong>。</p>
+<p>我們先思考剛剛的問題，如果我們接收到一串用空格分開的字串，要求寫一個函式取得第一個單字，<br>我們該怎麼做？</p>
+<p>先寫出函式簽名，我們才能理解該怎麼解決問題：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">first_word</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> ?</span><br></pre></td></tr></table></figure>
+<p>可以看到，確定會有一個參數 <code>&amp;String</code>，因為我們已經知道不需要取得字串的所有權，這很合理；<br>但是我們還不知道要回傳什麼，所以回傳型別仍然是個問號。<br>我們先嘗試把單字最後一個索引回傳並與空格 <code>&#39; &#39;</code> 做比較：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">first_word</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">usize</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">bytes</span> = s.<span class="title function_ invoke__">as_bytes</span>();</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">for</span> (i, &amp;item) <span class="keyword">in</span> bytes.<span class="title function_ invoke__">iter</span>().<span class="title function_ invoke__">enumerate</span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> item == <span class="string">b&#x27; &#x27;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    s.<span class="title function_ invoke__">len</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這裡出現了幾個不熟悉的方法：<code>as_bytes()</code>、<code>iter()</code> 與 <code>enumerate()</code>，<br>其中 <code>as_bytes()</code> 是將 <code>String</code> 轉為位元組陣列，因為我們需要遍歷字串的每個元素；<br><code>iter()</code> 在非常後面才會提及，這邊只要知道它可以回傳集合中每一個元素；<br><code>enumerate()</code> 則是將 <code>iter()</code> 的結果轉為如 <code>(index, &amp;element)</code> 的元組回傳，<br>其中 <code>index</code> 是索引，<code>&amp;element</code> 是元素的引用。<br>如此，我們便能省去計算索引的時間。</p>
+<p>接著，我們利用模式配對解構元組來獲取數值，<br>並使用字串字面值的語法比對空格，如果有空格就回傳位置，否則回傳字串長度。</p>
+<p>現在我們可以找到第一個單字的結尾索引，<br>但需要注意的是，上面回傳的是一個 <code>usize</code>，需要套用在 <code>&amp;String</code> 上才有意義。<br>簡單的說，無法保證這個回傳值在未來是否有效：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">word</span> = <span class="title function_ invoke__">first_word</span>(&amp;s); <span class="comment">// word 取得數值 5</span></span><br><span class="line"></span><br><span class="line">    s.<span class="title function_ invoke__">clear</span>(); <span class="comment">// 這會清空 String，這就等於 &quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// word 仍然是數值 5 ，但是我們已經沒有相等意義的字串了</span></span><br><span class="line">    <span class="comment">// 擁有 5 的變數 word 現在完全沒意義！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>雖然這段程式碼可以編譯執行，但仍然有程式錯誤：<br>在 <code>s.clear()</code> 之後 <code>word</code> 已經失去相等意義的字串。<br>如果接著繼續使用 <code>s</code> 取得單字，就會發生錯誤。</p>
+<p>若是要避免這樣的資料脫勾，以目前學到的方法，會製造出更多沒有直接相關的計算結果，還需要保持同步，<br>這太容易發生錯誤，所以 Rust 提供一個相對安全的方式，也就是這邊要討論的切片。</p>
+<h3 id="字串切片"><a href="#字串切片" class="headerlink" title="字串切片"></a>字串切片</h3><p>字串切片是引用一部分的 <code>String</code>，如下：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">hello</span> = &amp;s[<span class="number">0</span>..<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">world</span> = &amp;s[<span class="number">6</span>..<span class="number">11</span>];</span><br></pre></td></tr></table></figure>
+<p>其中 <code>s[0..5]</code> 代表取用的範圍，<br><code>[起始索引..結束索引]</code> 這樣的指定範圍語法代表從起始索引開始到結束索引停止，且不包含結束索引。<br>切片與字串相同內部擁有一個結構：指向<strong>起始位置的指標</strong>以及<strong>長度（結束索引減去起始索引）</strong>。</p>
+<p>指定範圍若是從索引 0 開始，此時語法可以如 <code>[..2]</code>，省略 <code>0</code>；<br>而若是包含最後一位元，同樣能省略最後一個數值：<code>[3..]</code>；<br>而如果要整個字串，甚至可以這樣表達：<code>[..]</code>。<br>（注意：這樣的切片索引範圍必須是有效的 UTF-8 字元。）</p>
+<p>利用切片，我們可以重寫前面的 <code>first_word</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">first_word</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> &amp;<span class="type">str</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">bytes</span> = s.<span class="title function_ invoke__">as_bytes</span>();</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">for</span> (i, &amp;item) <span class="keyword">in</span> bytes.<span class="title function_ invoke__">iter</span>().<span class="title function_ invoke__">enumerate</span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> item == <span class="string">b&#x27; &#x27;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &amp;s[<span class="number">0</span>..i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;s[..]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同樣是判斷第一個空格，但我們可以利用找到的索引產生字串切片並回傳，這樣乾淨太多了；<br>並且，因為切片會使編譯器確保引用有效，所以前面發生的問題程式碼就會被編譯器擋下。</p>
+<h3 id="字串字面值作為切片"><a href="#字串字面值作為切片" class="headerlink" title="字串字面值作為切片"></a>字串字面值作為切片</h3><p>先回憶一下字串字面值如何存在執行檔，那麼現在從切片我們可以更加理解：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="string">&quot;Hello, world!&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>在這裡 <code>s</code> 是 <code>&amp;str</code>，因為它是指向執行檔某部份的切片，<br>同時也說明字串字面值不可變的原因，是因為 <code>&amp;str</code> 是個<strong>不可變引用</strong>。</p>
+<h3 id="字串切片作為參數"><a href="#字串切片作為參數" class="headerlink" title="字串切片作為參數"></a>字串切片作為參數</h3><p>我們可以再次改善 <code>first_word</code> 的簽名：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">first_word</span>(s: &amp;<span class="type">str</span>) <span class="punctuation">-&gt;</span> &amp;<span class="type">str</span> </span><br></pre></td></tr></table></figure>
+<p>這是比較有經驗的人的寫法，因為這樣允許函式同時接受 <code>&amp;String</code> 與 <code>&amp;str</code>，<br>在我們有切片時直接傳遞，而有 <code>String</code> 時傳遞整個切片或是引用，<br>具有非常大的彈性。（這裡用到強制解引用，在非常後面會提及）</p>
+<h3 id="其他切片"><a href="#其他切片" class="headerlink" title="其他切片"></a>其他切片</h3><p>切片並非只有字串可以使用，如陣列也可以使用：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">slice</span> = &amp;a[<span class="number">1</span>..<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">assert_eq!</span>(slice, &amp;[<span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+<p>這裡的切片為 <code>&amp;[i32]</code>，如同字串切片一樣儲存第一個元素與長度。<br>以後會有更多使用這類切片的機會，在不遠的將來會討論這些場合。</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>所有權與借用、切片是非常重要的 Rust 概念，能夠讓我們寫出符合 Rust 期待的安全程式碼；<br>同時所有權系統也能夠減少我們花在除錯的時間。</p>
+<p>不過這概念非常困難，我自己都不能保證這筆記寫得很精確……<br>但也希望多少能讓自己更有印象，因為這會影響後面很多的執行，比如下一篇要討論的自訂型別概念————<strong>結構體（Structure）</strong>。</p>
+<p>希望大家在學習路上都能開開心心。</p>
+<p>火山 &#x2F; Kazan<br>2023.02.16</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/rust-learning-part3/" data-id="cle6ur56s000ut3r24kn83v21" data-title="Rust 學習筆記第三章 - 所有權（下）" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/posts/rust-learning-part2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Rust 學習筆記第二章 - 所有權（上）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 16.67px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 13.33px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 13.33px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 13.33px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 13.33px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/rust-learning-part3/">Rust 學習筆記第三章 - 所有權（下）</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-part2/">Rust 學習筆記第二章 - 所有權（上）</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-part1/">Rust 學習筆記第一章 - 基礎概念篇</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-prologue/">Rust 學習筆記 - 序篇</a>
+          </li>
+        
+          <li>
+            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
