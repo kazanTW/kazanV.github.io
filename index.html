@@ -84,6 +84,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-rust-learning-part4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/rust-learning-part4/" class="article-date">
+  <time class="dt-published" datetime="2023-02-19T20:13:00.000Z" itemprop="datePublished">2023-02-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/rust-learning-part4/">Rust 學習筆記第四章 - 結構體</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上次我們已經大略討論完 Rust 最重要的概念：所有權，<br>這次要討論的則是結構體（structure），是很常見的資料結構。<br>如果學過 C&#x2F;C++ 大概會很有印象。</p>
+<h2 id="結構體"><a href="#結構體" class="headerlink" title="結構體"></a>結構體</h2><p>結構體與元組類似，兩者都可以擁有多種數值，<br>但結構體的每個資料部份都需要被命名以表達意義；<br>這同時允許我們不用依賴資料的順序存取結構體實例的值。</p>
+<p>如果要定義結構體，使用 <code>struct</code> 關鍵字並命名，<br>然後在 <code>&#123;&#125;</code> 內定義欄位（fields），也就是每個資料部份的名稱與型別。<br>以下是一個簡單的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    active: <span class="type">bool</span>,</span><br><span class="line">    username: <span class="type">String</span>,</span><br><span class="line">    email: <span class="type">String</span>,</span><br><span class="line">    sign_in_count: <span class="type">u64</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定義完結構體，接著就可以在其他地方建立擁有實際數值的實例（instance）：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">user1</span> = User &#123;</span><br><span class="line">        active: <span class="literal">true</span>,</span><br><span class="line">        email: <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;someone@example.com&quot;</span>),</span><br><span class="line">        username: <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;someusername123&quot;</span>),</span><br><span class="line">        sign_in_count: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    user1.email = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;anotheremail@example.com&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上，我們對每個欄位指定實際的數值以建立一個實例；<br>若是實例可變，可以用 <code>.</code> 存取指定的欄位並賦值更改。<br>注意，整個實例可變才能更改單一欄位，Rust 不允許一個實例中僅有特定欄位被標記為可變。</p>
+<p>另外如同表達式，函式本體最後的表達式可以回傳一個新的結構體實例：</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/rust-learning-part4/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/rust-learning-part4/" data-id="clefah21u000wirr25k3251on" data-title="Rust 學習筆記第四章 - 結構體" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-rust-learning-part3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/posts/rust-learning-part3/" class="article-date">
@@ -126,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part3/" data-id="cle6wbba0000t7ur2hxf95i78" data-title="Rust 學習筆記第三章 - 所有權（下）" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part3/" data-id="clefah21t000uirr28a6m648z" data-title="Rust 學習筆記第三章 - 所有權（下）" class="article-share-link">Share</a>
       
       
       
@@ -184,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part2/" data-id="cle6wbb9y000o7ur23vf4257u" data-title="Rust 學習筆記第二章 - 所有權（上）" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part2/" data-id="clefah21r000pirr21q9c873d" data-title="Rust 學習筆記第二章 - 所有權（上）" class="article-share-link">Share</a>
       
       
       
@@ -239,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="cle6wbb9z000p7ur24jg47q5d" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="clefah21p000nirr24eb0ag9m" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
       
       
       
@@ -294,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="cle6wbba1000v7ur28l480on0" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="clefah21v000zirr29ukb6g0e" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
       
       
       
@@ -349,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="cle6wbb9x000k7ur26ebt763w" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="clefah21n000jirr23wom9b56" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
       
       
       
@@ -397,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/welcome/" data-id="cle6wbba2000y7ur2bmkeary9" data-title="Welcome!" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/welcome/" data-id="clefah21w0012irr238x0f4bs" data-title="Welcome!" class="article-share-link">Share</a>
       
       
       
@@ -449,7 +505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="cle6wbb9u000e7ur2fqwzdee6" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="clefah21l000iirr2f8egdvjq" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
       
       
       
@@ -508,7 +564,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install/" data-id="cle6wbb9r00097ur2hblpa4pn" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install/" data-id="clefah21k000eirr22c1w3jwc" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
       
       
       
@@ -563,66 +619,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="cle6wbb9w000i7ur2fea718vm" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="clefah21j000dirr289arf0sh" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-coding-style" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/posts/coding-style/" class="article-date">
-  <time class="dt-published" datetime="2022-09-25T23:29:05.000Z" itemprop="datePublished">2022-09-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Others/">Others</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/posts/coding-style/">良好的 Coding style</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上一篇聊到同學們 code 的排版造成我很嚴重的視力及心理傷害（無誤），<br>這篇正好來聊聊一個好的 coding style 是什麼吧！</p>
-<p><em><strong>注意：本篇所有論點皆屬個人見解，若不認同請保持理性討論。</strong></em></p>
-<h2 id="什麼是-coding-style？"><a href="#什麼是-coding-style？" class="headerlink" title="什麼是 coding style？"></a>什麼是 coding style？</h2><p>Coding style 指的是「程式碼的『寫作』風格」，<br>如同一般的文章風格一樣，程式碼的寫作風格也會因人而異，<br>小至空格的使用、大括號 <code>&#123;&#125;</code> 的位置，大至函式的宣告、語法的選擇都會有不同的個人風格。</p>
-<p><strong>那為什麼要強調「好的」coding style？</strong></p>
-<p>如果初學程式設計的人，可能會在教材上看到大部分高階程式語言有個特性——「可讀性」，<br>也就是容易閱讀、容易理解，這也造就了現代的開發協作環境。<br>但我個人認為這樣的特性需要配合良好的撰寫習慣才能發揮到最大，<br>特別是在幫別人 debug 的時候，如果你看到一個雜亂無章、文字過度集中的程式碼，<br>真的會跟我一樣眼睛很痛（o</p>
-<p>以下是我覺得很重要的幾個各語言都通用的 coding style：</p>
-<h3 id="空格與段落"><a href="#空格與段落" class="headerlink" title="空格與段落"></a>空格與段落</h3><p>首先給各位看個範例：</p>
-        
-          <p class="article-more-link">
-            <a href="/posts/coding-style/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/coding-style/" data-id="cle6wbb9l00037ur22v5lctxb" data-title="良好的 Coding style" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
 
     </footer>
   </div>
@@ -689,6 +690,10 @@
       <ul>
         
           <li>
+            <a href="/posts/rust-learning-part4/">Rust 學習筆記第四章 - 結構體</a>
+          </li>
+        
+          <li>
             <a href="/posts/rust-learning-part3/">Rust 學習筆記第三章 - 所有權（下）</a>
           </li>
         
@@ -702,10 +707,6 @@
         
           <li>
             <a href="/posts/rust-learning-prologue/">Rust 學習筆記 - 序篇</a>
-          </li>
-        
-          <li>
-            <a href="/posts/arch-install-real/">Arch Linux 安裝紀錄 2023</a>
           </li>
         
       </ul>
