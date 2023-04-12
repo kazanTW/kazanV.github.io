@@ -84,6 +84,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-kde-plasma-vs-gnome" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/kde-plasma-vs-gnome/" class="article-date">
+  <time class="dt-published" datetime="2023-04-03T03:56:35.000Z" itemprop="datePublished">2023-04-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Utils/">Utils</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/kde-plasma-vs-gnome/">KDE Plasma vs GNOME —— 桌面環境使用心得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>桌面環境用了一年多的 KDE Plasma，最近想說換換口味去玩一下 GNOME，<br>在踩到不少雷後也算是逐漸上手了，就來分享一下使用的心得，<br><del>順便懺悔自己又拖更。</del></p>
+<h2 id="桌面環境的發展歷史"><a href="#桌面環境的發展歷史" class="headerlink" title="桌面環境的發展歷史"></a>桌面環境的發展歷史</h2><p>如果是使用 Windows &#x2F; macOS 的人可能比較不熟悉桌面環境這個概念。</p>
+<p>桌面環境（Desktop Environment，DE），<br>是讓 *nix（這個名詞很常見，以後有機會來聊聊）類的作業系統可以有圖形界面的一個的重要系統套件類型。<br>以前 Linux 是純文字的作業系統，但後來為了方便操作，開發出了桌面環境讓 Linux 能夠像 Windows &#x2F; macOS 一樣透過圖形界面操作系統。</p>
+<p>DE 通常除了圖形界面外，還需要搭配視窗管理與顯示管理（Display Manager，DM）的工具，才能有堪用的視窗系統，<br>常見的 DE 如 GNOME、KDE Plasma、XFCE、i3 等。</p>
+<h2 id="KDE-Plasma"><a href="#KDE-Plasma" class="headerlink" title="KDE Plasma"></a>KDE Plasma</h2><p>KDE Plasma 是屬於 KDE project 的一部分，KDE 是一個開源的圖形套件專案社群，其中 Plasma 是他們主力推廣的 DE 專案，<br>並且與 FreeDesktop.org 合作，可以使用他們釋出的小工具程式，通常還會配合 KDE 自家的系統應用程式，例如純文字編輯器 Kate、終端機模擬軟體 Konsole 等。</p>
+<p>Plasma 預設使用的 DM 是 SDDM（Simple Desktop Display Manager），配合視窗管理器 kwin，預設界面類似 Windows 桌面（如下圖）。</p>
+<h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3>
+        
+          <p class="article-more-link">
+            <a href="/posts/kde-plasma-vs-gnome/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/kde-plasma-vs-gnome/" data-id="clgdh2q4i000zcyr225osakjz" data-title="KDE Plasma vs GNOME —— 桌面環境使用心得" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DE/" rel="tag">DE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GNOME/" rel="tag">GNOME</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KDE-Plasma/" rel="tag">KDE Plasma</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-rust-learning-part4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/posts/rust-learning-part4/" class="article-date">
@@ -110,11 +165,11 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上次我們已經大略討論完 Rust 最重要的概念：所有權，<br>這次要討論的則是結構體（structure），是很常見的資料結構。<br>如果學過 C&#x2F;C++ 大概會很有印象。</p>
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上次我們已經大略討論完 Rust 最重要的概念：所有權，<br>這次要討論的則是<strong>結構體（structure）</strong>，是很常見的資料結構。<br>如果學過 C&#x2F;C++ 大概會很有印象。</p>
 <h2 id="結構體"><a href="#結構體" class="headerlink" title="結構體"></a>結構體</h2><p>結構體與元組類似，兩者都可以擁有多種數值，<br>但結構體的每個資料部份都需要被命名以表達意義；<br>這同時允許我們不用依賴資料的順序存取結構體實例的值。</p>
-<p>如果要定義結構體，使用 <code>struct</code> 關鍵字並命名，<br>然後在 <code>&#123;&#125;</code> 內定義欄位（fields），也就是每個資料部份的名稱與型別。<br>以下是一個簡單的例子：</p>
+<p>如果要定義結構體，使用 <code>struct</code> 關鍵字並命名，<br>然後在 <code>&#123;&#125;</code> 內定義<strong>欄位（fields）</strong>，也就是每個資料部份的名稱與型別。<br>以下是一個簡單的例子：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    active: <span class="type">bool</span>,</span><br><span class="line">    username: <span class="type">String</span>,</span><br><span class="line">    email: <span class="type">String</span>,</span><br><span class="line">    sign_in_count: <span class="type">u64</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>定義完結構體，接著就可以在其他地方建立擁有實際數值的實例（instance）：</p>
+<p>定義完結構體，接著就可以在其他地方建立擁有實際數值的<strong>實例（instance）</strong>：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">user1</span> = User &#123;</span><br><span class="line">        active: <span class="literal">true</span>,</span><br><span class="line">        email: <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;someone@example.com&quot;</span>),</span><br><span class="line">        username: <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;someusername123&quot;</span>),</span><br><span class="line">        sign_in_count: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    user1.email = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;anotheremail@example.com&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如上，我們對每個欄位指定實際的數值以建立一個實例；<br>若是實例可變，可以用 <code>.</code> 存取指定的欄位並賦值更改。<br>注意，整個實例可變才能更改單一欄位，Rust 不允許一個實例中僅有特定欄位被標記為可變。</p>
 <p>另外如同表達式，函式本體最後的表達式可以回傳一個新的結構體實例：</p>
@@ -126,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part4/" data-id="clefah21u000wirr25k3251on" data-title="Rust 學習筆記第四章 - 結構體" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part4/" data-id="clgdh2q4h000wcyr2erwf1hg0" data-title="Rust 學習筆記第四章 - 結構體" class="article-share-link">Share</a>
       
       
       
@@ -182,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part3/" data-id="clefah21t000uirr28a6m648z" data-title="Rust 學習筆記第三章 - 所有權（下）" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part3/" data-id="clgdh2q4g000ucyr28n7jdq0t" data-title="Rust 學習筆記第三章 - 所有權（下）" class="article-share-link">Share</a>
       
       
       
@@ -240,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part2/" data-id="clefah21r000pirr21q9c873d" data-title="Rust 學習筆記第二章 - 所有權（上）" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part2/" data-id="clgdh2q4f000pcyr2hy962f3e" data-title="Rust 學習筆記第二章 - 所有權（上）" class="article-share-link">Share</a>
       
       
       
@@ -295,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="clefah21p000nirr24eb0ag9m" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-part1/" data-id="clgdh2q4e000ncyr2ho1k3qip" data-title="Rust 學習筆記第一章 - 基礎概念篇" class="article-share-link">Share</a>
       
       
       
@@ -350,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="clefah21v000zirr29ukb6g0e" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/rust-learning-prologue/" data-id="clgdh2q4l0014cyr23t1yewjq" data-title="Rust 學習筆記 - 序篇" class="article-share-link">Share</a>
       
       
       
@@ -405,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="clefah21n000jirr23wom9b56" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-real/" data-id="clgdh2q4b000jcyr27tig7kg8" data-title="Arch Linux 安裝紀錄 2023" class="article-share-link">Share</a>
       
       
       
@@ -453,7 +508,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/welcome/" data-id="clefah21w0012irr238x0f4bs" data-title="Welcome!" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/welcome/" data-id="clgdh2q4k0012cyr2hc0pdz3x" data-title="Welcome!" class="article-share-link">Share</a>
       
       
       
@@ -505,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="clefah21l000iirr2f8egdvjq" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install-bios/" data-id="clgdh2q4b000icyr2cgar0j1q" data-title="Arch Linux 安裝練習筆記 2022 - BIOS+MBR" class="article-share-link">Share</a>
       
       
       
@@ -564,66 +619,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/arch-install/" data-id="clefah21k000eirr22c1w3jwc" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
+      <a data-url="http://kazan.tw/posts/arch-install/" data-id="clgdh2q48000dcyr21gcm9ghi" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VM/" rel="tag">VM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-nvim-setting-awesome" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/posts/nvim-setting-awesome/" class="article-date">
-  <time class="dt-published" datetime="2022-10-04T10:49:06.000Z" itemprop="datePublished">2022-10-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Technical/">Technical</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p><del>斷更快一週我很抱歉（</del></p>
-<p>上次我們利用外掛設定了基本的 LSP 跟自動完成功能，<br>不過用著用著就想好像少了些什麼？</p>
-<p>然後高秋看到就吐嘈我說：你為什麼直接用終端機界面，不設定個主題？<br>還有你不覺得有個狀態列的提示你工作會比較方便嗎？<br>我才恍然大悟，原來這種終端機界面的純文字編輯器還有這麼多有趣的外掛！</p>
-<p>於是這兩天在一邊作業翻車的情況下，我又開始了設定<del>（ㄊㄧㄠˊ ㄐㄧㄠˋ）</del>之旅，<br>花了一整天終於搞定以下的「玩具」（？</p>
-<p>以下就是一些簡單的紀錄。</p>
-<h2 id="背景主題"><a href="#背景主題" class="headerlink" title="背景主題"></a>背景主題</h2><p>我選用了 <a target="_blank" rel="noopener" href="https://github.com/EdenEast/nightfox.nvim">Nightfox</a> 這個外掛，有很多主題選項，這邊我採用是淺色底的 Dayfox。<br><img src="https://user-images.githubusercontent.com/2746374/158456281-e8a968c0-e282-4943-b919-3d8454ca0529.png" alt="Dayfox"><br>(Source: GitHub README)</p>
-<h2 id="狀態欄"><a href="#狀態欄" class="headerlink" title="狀態欄"></a>狀態欄</h2><p>我用了 <a target="_blank" rel="noopener" href="https://github.com/nvim-lualine/lualine.nvim">lualine</a>，然後改了一些顯示的設定讓他比較乾淨一點</p>
-        
-          <p class="article-more-link">
-            <a href="/posts/nvim-setting-awesome/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="clefah21j000dirr289arf0sh" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li></ul>
 
     </footer>
   </div>
@@ -648,7 +648,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分類</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/">Utils</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
     </div>
   </div>
 
@@ -658,7 +658,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DE/" rel="tag">DE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNOME/" rel="tag">GNOME</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDE-Plasma/" rel="tag">KDE Plasma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
     </div>
   </div>
 
@@ -668,7 +668,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Arch/" style="font-size: 16.67px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Data-Structure/" style="font-size: 13.33px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 13.33px;">Editors</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 13.33px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 13.33px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
+      <a href="/tags/Arch/" style="font-size: 16.67px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/DE/" style="font-size: 10px;">DE</a> <a href="/tags/Data-Structure/" style="font-size: 13.33px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 13.33px;">Editors</a> <a href="/tags/GNOME/" style="font-size: 10px;">GNOME</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/KDE-Plasma/" style="font-size: 10px;">KDE Plasma</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 13.33px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 13.33px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 10px;">infra</a>
     </div>
   </div>
 
@@ -677,7 +677,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
     </div>
   </div>
 
@@ -688,6 +688,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/posts/kde-plasma-vs-gnome/">KDE Plasma vs GNOME —— 桌面環境使用心得</a>
+          </li>
         
           <li>
             <a href="/posts/rust-learning-part4/">Rust 學習筆記第四章 - 結構體</a>
@@ -703,10 +707,6 @@
         
           <li>
             <a href="/posts/rust-learning-part1/">Rust 學習筆記第一章 - 基礎概念篇</a>
-          </li>
-        
-          <li>
-            <a href="/posts/rust-learning-prologue/">Rust 學習筆記 - 序篇</a>
           </li>
         
       </ul>
