@@ -6,7 +6,7 @@
   <link href="http://kazan.tw/atom.xml" rel="self"/>
   
   <link href="http://kazan.tw/"/>
-  <updated>2023-04-03T04:34:53.439Z</updated>
+  <updated>2023-05-09T05:59:17.595Z</updated>
   <id>http://kazan.tw/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>網站改版通知</title>
+    <link href="http://kazan.tw/posts/update-notifaction/"/>
+    <id>http://kazan.tw/posts/update-notifaction/</id>
+    <published>2023-05-09T05:54:23.000Z</published>
+    <updated>2023-05-09T05:59:17.595Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前情提要……個頭"><a href="#前情提要……個頭" class="headerlink" title="前情提要……個頭"></a>前情提要……個頭</h2><p>簡單來說就是普通的 SSG 已經無法滿足我了（o<br>我決定用現代前端框架等重寫整個網站，所以近期暫時不會有新文章。<br><del>（合理化自己拖稿的最佳藉口）</del></p><p>總之，期待新網站與各位見面的那一天。<br>（不過可能會等暑假過後吧不然我真的快忙死）</p><p>火山 &#x2F; Kazan<br>2023.05.09 </p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;前情提要……個頭&quot;&gt;&lt;a href=&quot;#前情提要……個頭&quot; class=&quot;headerlink&quot; title=&quot;前情提要……個頭&quot;&gt;&lt;/a&gt;前情提要……個頭&lt;/h2&gt;&lt;p&gt;簡單來說就是普通的 SSG 已經無法滿足我了（o&lt;br&gt;我決定用現代前端框架等重寫整個網站，所以近期暫時不會有新文章。&lt;br&gt;&lt;del&gt;（合理化自己拖稿的最佳藉口）&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;總之，期待新網站與各位見面的那一天。&lt;br&gt;（不過可能會等暑假過後吧不然我真的快忙死）&lt;/p&gt;
+&lt;p&gt;火山 &amp;#x2F; Kazan&lt;br&gt;2023.05.09 &lt;/p&gt;
+</summary>
+    
+    
+    
+    <category term="technical" scheme="http://kazan.tw/categories/technical/"/>
+    
+    
+    <category term="infra" scheme="http://kazan.tw/tags/infra/"/>
+    
+  </entry>
   
   <entry>
     <title>KDE Plasma vs GNOME —— 桌面環境使用心得</title>

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>網站改版通知</title>
+      <link href="//posts/update-notifaction/"/>
+      <url>//posts/update-notifaction/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前情提要……個頭"><a href="#前情提要……個頭" class="headerlink" title="前情提要……個頭"></a>前情提要……個頭</h2><p>簡單來說就是普通的 SSG 已經無法滿足我了（o<br>我決定用現代前端框架等重寫整個網站，所以近期暫時不會有新文章。<br><del>（合理化自己拖稿的最佳藉口）</del></p><p>總之，期待新網站與各位見面的那一天。<br>（不過可能會等暑假過後吧不然我真的快忙死）</p><p>火山 &#x2F; Kazan<br>2023.05.09 </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> technical </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> infra </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>KDE Plasma vs GNOME —— 桌面環境使用心得</title>
       <link href="//posts/kde-plasma-vs-gnome/"/>
       <url>//posts/kde-plasma-vs-gnome/</url>
