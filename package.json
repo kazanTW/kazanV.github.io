@@ -28,6 +28,6 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
     "hexo-tag-bootstrap": "^0.2.2",
-    "hexo-theme-landscape": "^0.0.3"
+    "hexo-theme-landscape": "^1.0.0"
   }
 }
