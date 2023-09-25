@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Kazan&#39;s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="歡迎光臨！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kazan&#39;s Home">
+<meta property="og:url" content="http://kazan.tw/page/2/">
+<meta property="og:site_name" content="Kazan&#39;s Home">
+<meta property="og:description" content="歡迎光臨！">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Kazan @ Kazan Studio">
+<meta property="article:tag" content="炎火山">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Kazan's Home" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kazan&#39;s Home</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">敗北の少年、平凡を謳え</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/cal">Calender</a>
+        
+          <a class="main-nav-link" href="/contact">Contact</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kazan.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-arch-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/arch-install/" class="article-date">
+  <time class="dt-published" datetime="2022-10-16T22:31:19.000Z" itemprop="datePublished">2022-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux-distros/">Linux distros</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/arch-install/">Arch Linux 安裝練習筆記 2022</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>Linux 有許多的發行版（distros），<br>而目前我所使用的發行版是 Debian Linux bookworm&#x2F;sid，<br>儘管已經是非常新的版本，但還是免不了 Debian 的老毛病——套件老舊；<br>加之我準備在家裡架一台 server（不論是遠端主機或 NAS 都需要一台 server），需要更穩定而先進的作業系統，<br>經過考慮與比較（<del>以及煩高秋</del>）後決定改用目前使用者社群最大的 Arch Linux。</p>
+<p>不過 Arch 一向被認為安裝很困難，<br>連 Arch Linux 台灣社群都明言安裝是最大的難關，甚至許多老手都常在裝機時遇上麻煩，<br>所以出現不少安裝指引的文章；<br>這次的文章一方面是提供安裝的一些提醒，一方面也是幫自己留下筆記，<br>那就讓我們來看看到底要如何安裝吧！</p>
+<h2 id="Arch-的特點"><a href="#Arch-的特點" class="headerlink" title="Arch 的特點"></a>Arch 的特點</h2><p>Arch 有四大特點：</p>
+<ul>
+<li>輕量</li>
+<li>簡潔</li>
+<li>社群活躍</li>
+<li>漸進式升級</li>
+</ul>
+<h3 id="輕量"><a href="#輕量" class="headerlink" title="輕量"></a>輕量</h3><p>與其他發行板相比，Arch 並不預裝任何套件，這使得系統可以非常精簡（包含安裝映像都是），所以需要什麼都是由使用者自行決定。</p>
+<h3 id="簡潔"><a href="#簡潔" class="headerlink" title="簡潔"></a>簡潔</h3><p>所有的函式庫、執行檔、文件、設定檔都有嚴格的路徑規範與系統管理，比較不會發生找不到設定檔的「迷路」狀況。</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/arch-install/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/arch-install/" data-id="clgdh2q48000dcyr21gcm9ghi" data-title="Arch Linux 安裝練習筆記 2022" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VM/" rel="tag">VM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nvim-setting-awesome" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/nvim-setting-awesome/" class="article-date">
+  <time class="dt-published" datetime="2022-10-04T10:49:06.000Z" itemprop="datePublished">2022-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Technical/">Technical</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/nvim-setting-awesome/">Neovim 設定 - 外觀篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p><del>斷更快一週我很抱歉（</del></p>
+<p>上次我們利用外掛設定了基本的 LSP 跟自動完成功能，<br>不過用著用著就想好像少了些什麼？</p>
+<p>然後高秋看到就吐嘈我說：你為什麼直接用終端機界面，不設定個主題？<br>還有你不覺得有個狀態列的提示你工作會比較方便嗎？<br>我才恍然大悟，原來這種終端機界面的純文字編輯器還有這麼多有趣的外掛！</p>
+<p>於是這兩天在一邊作業翻車的情況下，我又開始了設定<del>（ㄊㄧㄠˊ ㄐㄧㄠˋ）</del>之旅，<br>花了一整天終於搞定以下的「玩具」（？</p>
+<p>以下就是一些簡單的紀錄。</p>
+<h2 id="背景主題"><a href="#背景主題" class="headerlink" title="背景主題"></a>背景主題</h2><p>我選用了 <a target="_blank" rel="noopener" href="https://github.com/EdenEast/nightfox.nvim">Nightfox</a> 這個外掛，有很多主題選項，這邊我採用是淺色底的 Dayfox。<br><img src="https://user-images.githubusercontent.com/2746374/158456281-e8a968c0-e282-4943-b919-3d8454ca0529.png" alt="Dayfox"><br>(Source: GitHub README)</p>
+<h2 id="狀態欄"><a href="#狀態欄" class="headerlink" title="狀態欄"></a>狀態欄</h2><p>我用了 <a target="_blank" rel="noopener" href="https://github.com/nvim-lualine/lualine.nvim">lualine</a>，然後改了一些顯示的設定讓他比較乾淨一點</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/nvim-setting-awesome/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/nvim-setting-awesome/" data-id="clgdh2q49000ecyr21res0x10" data-title="Neovim 設定 - 外觀篇" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-coding-style" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/coding-style/" class="article-date">
+  <time class="dt-published" datetime="2022-09-25T23:29:05.000Z" itemprop="datePublished">2022-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Others/">Others</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/coding-style/">良好的 Coding style</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上一篇聊到同學們 code 的排版造成我很嚴重的視力及心理傷害（無誤），<br>這篇正好來聊聊一個好的 coding style 是什麼吧！</p>
+<p><em><strong>注意：本篇所有論點皆屬個人見解，若不認同請保持理性討論。</strong></em></p>
+<h2 id="什麼是-coding-style？"><a href="#什麼是-coding-style？" class="headerlink" title="什麼是 coding style？"></a>什麼是 coding style？</h2><p>Coding style 指的是「程式碼的『寫作』風格」，<br>如同一般的文章風格一樣，程式碼的寫作風格也會因人而異，<br>小至空格的使用、大括號 <code>&#123;&#125;</code> 的位置，大至函式的宣告、語法的選擇都會有不同的個人風格。</p>
+<p><strong>那為什麼要強調「好的」coding style？</strong></p>
+<p>如果初學程式設計的人，可能會在教材上看到大部分高階程式語言有個特性——「可讀性」，<br>也就是容易閱讀、容易理解，這也造就了現代的開發協作環境。<br>但我個人認為這樣的特性需要配合良好的撰寫習慣才能發揮到最大，<br>特別是在幫別人 debug 的時候，如果你看到一個雜亂無章、文字過度集中的程式碼，<br>真的會跟我一樣眼睛很痛（o</p>
+<p>以下是我覺得很重要的幾個各語言都通用的 coding style：</p>
+<h3 id="空格與段落"><a href="#空格與段落" class="headerlink" title="空格與段落"></a>空格與段落</h3><p>首先給各位看個範例：</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/coding-style/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/coding-style/" data-id="clgdh2q450007cyr233s9cdbc" data-title="良好的 Coding style" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-binary-search" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/binary-search/" class="article-date">
+  <time class="dt-published" datetime="2022-09-23T05:55:49.000Z" itemprop="datePublished">2022-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/binary-search/">資料結構 - 二元搜尋</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>這星期資結終於上機了，上週直接爽放一天假期ww<br>不過這周一上課就是混沌地獄，一堆人直接忘記 C 怎麼寫……（助教：完蛋了之後更難我豈不是忙死）<br>有人直接問怎麼輸入資料……連 <code>scanf()</code> 都忘記了嗎（尖叫<br><del>至於 VLA（<code>int array[n]</code>）跟 code 不排版就算了吧（點菸</del></p>
+<p>慣例的廢話就到這邊，接著來聊聊這周的題目——二元搜尋法吧。</p>
+<h2 id="基本知識"><a href="#基本知識" class="headerlink" title="基本知識"></a>基本知識</h2><p>一般我們在一串資料中要搜尋特定的一筆資料，直覺的方式就是從頭開始一筆筆比對，也就是所謂的線性搜尋，<br>但這樣需要花費的可能時間會非常的長，如果目標在最後一筆就會找非常久；<br>二元搜尋法則是利用「中間值」的概念，在一串已經<strong>排序過</strong>的資料中，每次都比對一定範圍的「中間」索引，<br>若不是目標資料的話則以中間值與其中一端為範圍，即縮小一半的搜尋區間，<br>然後不斷循環這樣的搜尋方式，直到找到目標。<br>這個方法相較於線性搜尋的好處是，搜尋的可能時間最壞會指數減少，<br>以演算法要求的時間複雜度而言，這是一個較好的解決方案。</p>
+<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><ul>
+<li><em>輸入：輸入一個陣列長度，並依序輸入整數陣列資料，最後輸入一個搜尋目標。</em></li>
+<li><em>輸出：每一輪搜尋都輸出兩行，第一行為左右邊界及中間值的索引值，第二行為對應的資料；若最後有找到目標資料，輸出其索引值。</em></li>
+<li><em><strong>注意：只能使用 C 或 C++，並請使用「遞迴」方式搜尋；另外本次的測資都是「可以找到目標」，不需要考慮找不到的情形。</strong></em></li>
+</ul>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>這邊就用我們的老朋友 C 來實作（C++？對不起我們不熟）。</p>
+<h3 id="注意-VLA"><a href="#注意-VLA" class="headerlink" title="注意 VLA"></a>注意 VLA</h3>
+        
+          <p class="article-more-link">
+            <a href="/posts/binary-search/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/binary-search/" data-id="clgdh2q400003cyr21rt61tyf" data-title="資料結構 - 二元搜尋" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nvim-setting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/nvim-setting/" class="article-date">
+  <time class="dt-published" datetime="2022-09-20T23:51:09.000Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Technical/">Technical</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/nvim-setting/">Neovim 設定</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>上一篇文章的最後我提到學任何語言首先要先調教好編輯器，<br>這是源自於我那天還沒開始寫任何 code，就先花了半天的時間在處理 Neovim 的設定，特別是 LSP 的設定真的差點搞死我……<br>乾脆寫一篇來紀錄跟分享這個過程。<br><del>我是不是要感謝我的笨拙跟容易翻車讓我常常有題材可以寫文章</del></p>
+<h2 id="為什麼是純文字編輯器"><a href="#為什麼是純文字編輯器" class="headerlink" title="為什麼是純文字編輯器"></a>為什麼是純文字編輯器</h2><p>或許有人會問：「現在新式的 IDE 像是 VS Code 界面漂亮而且使用方便，為什麼還要用純文字編輯器？」<br>這有很多可以說的面向，而且每個人的理由也不盡相同，<br>我自己的話是想要挑戰看看純文字編輯器的功能是不是真的不如 IDE、以及單純覺得好玩（o<br>當然專案開發我自己還是以 IDE 為主，因為視覺化的看專案檔真的比較輕鬆一點。<br>（BTW，雖然我前天 Java 是用 Neovim 寫的，<br>但強者我朋友 a.k.a. 清大怪物高秋表示「Java『專案』」是他數一數二推薦用 IDE 進行開發的語言，<br>因為純用 command line 會很煩躁）</p>
+<h2 id="為什麼是-Neovim"><a href="#為什麼是-Neovim" class="headerlink" title="為什麼是 Neovim"></a>為什麼是 Neovim</h2><p>純文字編輯器主流分成兩大系譜：emacs 跟 vi，那為什麼我選擇了 vi 這支而不是 emacs 系？<br><del>因為 emacs 東西太多了，多到我會尖叫 too much 那種多（關於這個我不打算寫，我會逼高秋寫），</del><br>vi 系的好處，或者說優勢是在 terminal 上比較便利，emacs 只有 GUI 版比較好用，<br>如果想嘗試終端機界面 coding，用 vi 系的體驗會比較好；<br>至於選擇 Neovim 是因為 plug-in 的生態比較活躍，<br>並且自行撰寫 plug-in 也比較容易<del>，這是個 plug-in 的<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1FliVTcX8bQ">新時代</a></del>。</p>
+<h2 id="Neovim-設定調教"><a href="#Neovim-設定調教" class="headerlink" title="Neovim 設定調教"></a>Neovim 設定<del>調教</del></h2><p>好我花太多篇幅寫為什麼了，趕快進入正題（（（</p>
+<p>先把 Neovim 安裝好（怎麼安裝？去搜尋！），接著要來改一下設定檔囉～</p>
+<h3 id="init-vim"><a href="#init-vim" class="headerlink" title="init.vim"></a>init.vim</h3>
+        
+          <p class="article-more-link">
+            <a href="/posts/nvim-setting/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/nvim-setting/" data-id="clgdh2q470009cyr24tv62h6k" data-title="Neovim 設定" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20-java-stack" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/20-java-stack/" class="article-date">
+  <time class="dt-published" datetime="2022-09-20T01:43:41.000Z" itemprop="datePublished">2022-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/20-java-stack/">Java 實作 Stack - 使用陣列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p><del>先吐嘈老師根本喪心病狂w</del></p>
+<p>昨天物件導向正式上課跟上機（雖然我都上自己的機），<br>一開始老師簡單介紹了 Java 基本操作，畢竟這年頭 Java 不是必修課（？）；<br>然後就出了三個作業：（萬年不變的）Hello world、運算子運用，<br>最後一個就是今天的主角：<strong>實作 Stack</strong>。</p>
+<p>如果說有學過 Java 可能會知道，<code>java.util</code> 有個 package 叫 <code>Stack</code> 就是用來實作 stack 的，<br>但老師笑容可掬的說：「<strong>請用 array 實作喔。</strong>」<br>差點在教室尖叫。</p>
+<h2 id="基本知識"><a href="#基本知識" class="headerlink" title="基本知識"></a>基本知識</h2><p>Stack &#x2F; 堆疊，顧名思義就是把資料「堆」上去的結構，所以有以下特性：</p>
+<ol>
+<li>先進後出 &#x2F; 後進先出（<strong>LIFO, Last In First Out</strong>）</li>
+<li>除了頭尾外的每個節點都有「前綴」與「後繼」</li>
+</ol>
+<p>對於 stack 的操作通常有以下兩種方法：</p>
+<ul>
+<li>push：將資料存入 stack 頂端</li>
+<li>pop：將 stack 頂端資料移除，頂端移到下一筆資料</li>
+</ul>
+<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2>
+        
+          <p class="article-more-link">
+            <a href="/posts/20-java-stack/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/20-java-stack/" data-id="clgdh2q460008cyr22e7whw12" data-title="Java 實作 Stack - 使用陣列" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-16-site-intro" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/16-site-intro/" class="article-date">
+  <time class="dt-published" datetime="2022-09-16T09:23:47.000Z" itemprop="datePublished">2022-09-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technical/">technical</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/posts/16-site-intro/">網站基礎架構</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>第一篇正式文章，來談談這個網站是怎麼產生的吧！</p>
+<h2 id="網域"><a href="#網域" class="headerlink" title="網域"></a>網域</h2><p>網域一開始是想用 Freenom 的免費網域，但他們不給新註冊了QQ，<br>後來想既然我是台灣人，就用 <code>.tw</code> 的網域好了，然後就去跟 HiNet 買了（800 元好貴）。<br>後面 DNS 之類的就丟給 Cloudflare 託管了，還順便弄了自己的 mail address（<del>真香</del>）。</p>
+<h2 id="架站工具選擇"><a href="#架站工具選擇" class="headerlink" title="架站工具選擇"></a>架站工具選擇</h2><p>你說 WordPress？<br>CMS 是很方便啦但還要多設定 WordPress 需要的 domain 設定之類的，<br>嫌麻煩就決定用一般常用的 SSG。</p>
+<p>至於 SSG 的選擇，<br>最一開始想選擇 Hugo，但部署我覺得很麻煩就放棄了；<br>後來又改成 Django，再來又轉成 Vite + Vue3，但這兩個都是 App 式，檔案跟網站架構我有點無法理解，也就相繼放棄掉。<br>最後是看很多人推薦選擇了 Hexo，用下去驚為天人（？）</p>
+<h2 id="主題"><a href="#主題" class="headerlink" title="主題"></a>主題</h2><p>就預設的 <code>landscape</code> 啊，還是大家有推薦的主題可以讓我參考www</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>最方便的選擇就是 GitHub Pages 囉XD，<del>雖然我也有 Netlify 之類的就是了</del>。<br>而且大部分的 SSG 官方文件其實都有提供 GitHub Pages 的部屬流程，算是蠻友善的w</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/16-site-intro/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kazan.tw/posts/16-site-intro/" data-id="clgdh2q3x0001cyr2hzp206wh" data-title="網站基礎架構" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一頁</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-distros/">Linux distros</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical/">Technical</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/">Utils</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technical/">technical</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DE/" rel="tag">DE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editors/" rel="tag">Editors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNOME/" rel="tag">GNOME</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDE-Plasma/" rel="tag">KDE Plasma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neovim/" rel="tag">Neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/" rel="tag">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infra/" rel="tag">infra</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Arch/" style="font-size: 16.67px;">Arch</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/DE/" style="font-size: 10px;">DE</a> <a href="/tags/Data-Structure/" style="font-size: 13.33px;">Data Structure</a> <a href="/tags/Editors/" style="font-size: 13.33px;">Editors</a> <a href="/tags/GNOME/" style="font-size: 10px;">GNOME</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/KDE-Plasma/" style="font-size: 10px;">KDE Plasma</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lua/" style="font-size: 10px;">Lua</a> <a href="/tags/Neovim/" style="font-size: 13.33px;">Neovim</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Rust/" style="font-size: 20px;">Rust</a> <a href="/tags/VM/" style="font-size: 13.33px;">VM</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/infra/" style="font-size: 13.33px;">infra</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/update-notifaction/">網站改版通知</a>
+          </li>
+        
+          <li>
+            <a href="/posts/kde-plasma-vs-gnome/">KDE Plasma vs GNOME —— 桌面環境使用心得</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-part4/">Rust 學習筆記第四章 - 結構體</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-part3/">Rust 學習筆記第三章 - 所有權（下）</a>
+          </li>
+        
+          <li>
+            <a href="/posts/rust-learning-part2/">Rust 學習筆記第二章 - 所有權（上）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Kazan @ Kazan Studio<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/cal" class="mobile-nav-link">Calender</a>
+  
+    <a href="/contact" class="mobile-nav-link">Contact</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
